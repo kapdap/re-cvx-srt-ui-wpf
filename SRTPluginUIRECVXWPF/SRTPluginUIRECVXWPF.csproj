@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>x64</Platforms>
+    <Authors>Kapdap</Authors>
+    <Company>Kapdap</Company>
+    <Product>Resident Evil: Code: Veronica WPF User Interface Plugin</Product>
+    <Description>A user-interface plugin to display the values provided by the Resident Evil: Code: Veronica Memory Provider Plugin in a WPF window.</Description>
+    <Copyright>Copyright © 2020 Kapdap</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/kapdap/re-cvx-srt-ui-wpf</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>speedrun</PackageTags>
+    <Version>0.9.0.0</Version>
+    <FileVersion>0.9.0.0</FileVersion>
+    <AssemblyVersion>0.9.0.0</AssemblyVersion>
+    <UseWPF>true</UseWPF>
+    <OutputType>Library</OutputType>
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+    <CopyDestionationPath>$(SolutionDir)..\SRTHost\SRTHost\bin\$(Configuration)\netcoreapp3.1\plugins</CopyDestionationPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SRTHost\SRTPluginBase\SRTPluginBase.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\..\re-cvx-srt-provider\SRTPluginProviderRECVX\SRTPluginProviderRECVX.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\CAUTION-ORANGE.gif" />
+    <None Remove="Resources\CAUTION-YELLOW.gif" />
+    <None Remove="Resources\DANGER.gif" />
+    <None Remove="Resources\FINE.gif" />
+    <None Remove="Resources\ICONS.png" />
+    <None Remove="Resources\POISON.gif" />
+    <None Remove="Resources\STATUS.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\CAUTION-ORANGE.gif" />
+    <Resource Include="Resources\CAUTION-YELLOW.gif" />
+    <Resource Include="Resources\DANGER.gif" />
+    <Resource Include="Resources\FINE.gif" />
+    <Resource Include="Resources\ICONS.png" />
+    <Resource Include="Resources\POISON.gif" />
+    <Resource Include="Resources\STATUS.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="CopyOutputToDestination" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <OutputFiles Include="$(OutDir)**\*"></OutputFiles>
+    </ItemGroup>
+    <Message Text="Copying files: @(OutputFiles)" Importance="high" />
+    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(CopyDestionationPath)\$(ProjectName)\%(RecursiveDir)" OverwriteReadOnlyFiles="true"></Copy>
+  </Target>
+
+</Project>

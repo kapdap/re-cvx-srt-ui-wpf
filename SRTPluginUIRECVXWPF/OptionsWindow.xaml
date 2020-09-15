@@ -1,0 +1,126 @@
+﻿<Window x:Class="SRTPluginUIRECVXWPF.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:SRTPluginUIRECVXWPF.Controls"
+        xmlns:local="clr-namespace:SRTPluginUIRECVXWPF"
+        mc:Ignorable="d"
+        Title="Options"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        UseLayoutRounding="True"
+        WindowStyle="None"
+        Background="#f0f0f0"
+        Closing="Window_Closing">
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Style>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+    <StackPanel>
+        <uc:TitlebarControl ShowMaximizeButton="False" />
+        <StackPanel>
+            <StackPanel Margin="15,10,15,0" Orientation="Horizontal">
+                <StackPanel Width="155">
+                <GroupBox Header="Game" Padding="5">
+                    <StackPanel>
+                        <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
+                        <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
+                        <CheckBox Content="Only Equipped"   IsChecked="{Binding Options.ShowEquipment}"  Margin="20,0,0,10" ToolTip="Only show the currently equipped item." IsEnabled="{Binding Options.ShowInventory}" />
+                        <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
+                        <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
+                        <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,0"  ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
+                    </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel Width="155" Margin="10,0,10,0">
+                    <GroupBox Header="Sizing" Padding="5" IsEnabled="false">
+                        <StackPanel>
+                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,10">
+                                <Label Grid.Column="0" Content="Text" Width="52" Padding="0,0,0,0" />
+                                <ComboBox Grid.Column="1"
+                                          SelectedValuePath="Content" 
+                                          SelectedValue="{Binding Options.TextSize}" 
+                                          Padding="6,0,5,1" 
+                                          DockPanel.Dock="Right"
+                                          ToolTip="Adjust scale of text in the main window.">
+                                    <ComboBoxItem Content="Normal" />
+                                    <ComboBoxItem Content="Small" />
+                                    <ComboBoxItem Content="Smaller" />
+                                    <ComboBoxItem Content="Smallest" />
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,10">
+                                <Label Grid.Column="0" Content="Icons" Width="52" Padding="0,0,0,0" />
+                                <ComboBox Grid.Column="1"
+                                          SelectedValuePath="Content" 
+                                          SelectedValue="{Binding Options.IconSize}" 
+                                          Padding="6,0,5,1" 
+                                          DockPanel.Dock="Right"
+                                          ToolTip="Adjust scale of the inventory icons.">
+                                    <ComboBoxItem Content="Normal" />
+                                    <ComboBoxItem Content="Small" />
+                                    <ComboBoxItem Content="Smaller" />
+                                    <ComboBoxItem Content="Smallest" />
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                                <Label Grid.Column="0" Content="Health" Width="52" Padding="0,0,0,0" />
+                                <ComboBox Grid.Column="1"
+                                          SelectedValuePath="Content" 
+                                          SelectedValue="{Binding Options.HealthSize}" 
+                                          Padding="6,0,5,1" 
+                                          DockPanel.Dock="Right"
+                                          ToolTip="Adjust scale of health status image.">
+                                    <ComboBoxItem Content="Normal" />
+                                    <ComboBoxItem Content="Small" />
+                                    <ComboBoxItem Content="Smaller" />
+                                    <ComboBoxItem Content="Smallest" />
+                                </ComboBox>
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Opacity" Padding="5">
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}" 
+                                     ToolTip="Move slider to adjust the opacity level of text and icons."
+                                     DockPanel.Dock="Right"
+                                     TextAlignment="Right"
+                                     Width="35" />
+                            <Slider Name="OpacitySlider" 
+                                    Value="{Binding Options.Opacity}" 
+                                    ToolTip="Move slider to adjust the opacity level of text and icons."
+                                    Minimum="0.05" 
+                                    Maximum="1"
+                                    TickFrequency="0.1" 
+                                    TickPlacement="BottomRight" 
+                                    Margin="0,0,5,0" />
+                        </DockPanel>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel Width="155">
+                    <GroupBox Header="Window" Padding="5">
+                        <StackPanel>
+                            <CheckBox Content="Always on Top" IsChecked="{Binding Options.AlwaysOnTop}"  Margin="0,0,0,10" ToolTip="Keeps the main window on top of all other windows." />
+                            <CheckBox Content="Show Titlebar" IsChecked="{Binding Options.ShowTitlebar}" Margin="0,0,0,10" ToolTip="Show/hide the main window titlebar." />
+                            <CheckBox Content="Transparent"   IsChecked="{Binding Options.Transparent}" ToolTip="Set the main window background to transparent." />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Developer" Padding="5">
+                        <StackPanel>
+                            <CheckBox Content="Debug Panel" IsChecked="{Binding Options.Debug}" Margin="0,0,0,10" ToolTip="Show/hide the debug panel." />
+                            <CheckBox Content="Debug Enemy" IsChecked="{Binding Options.DebugEnemy}" ToolTip="Enable/disable enemy debug mode." />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </StackPanel>
+            <Grid Margin="15" HorizontalAlignment="Left" Width="80">
+                <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" />
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</Window>
