@@ -34,13 +34,26 @@ namespace SRTPluginUIRECVXWPF.ViewModels
             }
         }
 
+        private InventoryItem _equipment;
+        public InventoryItem Equipment
+        {
+            get => _equipment;
+            private set
+            {
+                _equipment = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void Initalize(GameMemoryRECVX gameMemory)
         {
             if (GameMemory != null)
                 return;
 
             GameMemory = gameMemory;
+
             Inventory = new InventoryModel(GameMemory.Player.Inventory);
+            Equipment = new InventoryItem(GameMemory.Player.Equipment);
         }
     }
 }

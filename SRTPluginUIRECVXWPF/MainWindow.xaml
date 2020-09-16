@@ -333,67 +333,61 @@
                     <ColumnDefinition Width="112" />
                 </Grid.ColumnDefinitions>
 
-                <Rectangle Name="EquipmentRectangle"
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           Grid.ColumnSpan="2"
-                           HorizontalAlignment="Center"
-                           Width="{Binding Inventory.Items[0].ClipWidth}"
-                           ToolTip="{Binding Inventory.Items[0].Entry.Name}">
-                    <Rectangle.Style>
-                        <Style TargetType="{x:Type Rectangle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsEmpty}" Value="true">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Rectangle.Style>
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Inventory.Items[0].Clipping}"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Label Name="EquipmentLabel"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       VerticalAlignment="Bottom">
-                    <Label.Style>
-                        <Style TargetType="{x:Type Label}">
-                            <Setter Property="FontSize" Value="18" />
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter Property="Content" Value="{Binding Inventory.Items[0].Entry.Quantity}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsEmpty}" Value="true">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.HasQuantity}" Value="false">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsAcid}" Value="true">
-                                    <Setter Property="Foreground" Value="Yellow" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsBOW}" Value="true">
-                                    <Setter Property="Foreground" Value="LawnGreen" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsFlame}" Value="true">
-                                    <Setter Property="Foreground" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsInfinite}" Value="true">
-                                    <Setter Property="Content" Value="∞" />
-                                </DataTrigger>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions >
-                                        <Condition Binding="{Binding Inventory.Items[0].Entry.IsInfinite}" Value="false" />
-                                        <Condition Binding="{Binding Inventory.Items[0].Entry.Quantity}" Value="0" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Foreground" Value="DarkRed" />
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Label.Style>
-                </Label>
-
                 <Grid Name="ItemSlot1"
+                      Grid.Row="{Binding Inventory.Items[0].Entry.SlotRow}" 
+                      Grid.Column="{Binding Inventory.Items[0].GridColumn}" 
+                      Grid.ColumnSpan="{Binding Inventory.Items[0].Entry.SlotSize}"
+                      ToolTip="{Binding Inventory.Items[0].Entry.Name}">
+                    <Grid.Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsEmpty}" Value="true">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Inventory.Items[1].Clipping}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label VerticalAlignment="Bottom">
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="FontSize" Value="18" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Content" Value="{Binding Inventory.Items[0].Entry.Quantity}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Inventory.Items[0].Entry.HasQuantity}" Value="false">
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsAcid}" Value="true">
+                                        <Setter Property="Foreground" Value="Yellow" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsBOW}" Value="true">
+                                        <Setter Property="Foreground" Value="LawnGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsFlame}" Value="true">
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsInfinite}" Value="true">
+                                        <Setter Property="Content" Value="∞" />
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions >
+                                            <Condition Binding="{Binding Inventory.Items[0].Entry.IsInfinite}" Value="false" />
+                                            <Condition Binding="{Binding Inventory.Items[0].Entry.Quantity}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Foreground" Value="DarkRed" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                </Grid>
+
+                <Grid Name="ItemSlot2" 
                       Grid.Row="{Binding Inventory.Items[1].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[1].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[1].Entry.SlotSize}"
@@ -447,7 +441,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot2" 
+                <Grid Name="ItemSlot3"
                       Grid.Row="{Binding Inventory.Items[2].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[2].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[2].Entry.SlotSize}"
@@ -501,7 +495,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot3"
+                <Grid Name="ItemSlot4"
                       Grid.Row="{Binding Inventory.Items[3].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[3].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[3].Entry.SlotSize}"
@@ -555,7 +549,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot4"
+                <Grid Name="ItemSlot5"
                       Grid.Row="{Binding Inventory.Items[4].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[4].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[4].Entry.SlotSize}"
@@ -609,7 +603,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot5"
+                <Grid Name="ItemSlot6"
                       Grid.Row="{Binding Inventory.Items[5].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[5].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[5].Entry.SlotSize}"
@@ -663,7 +657,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot6"
+                <Grid Name="ItemSlot7"
                       Grid.Row="{Binding Inventory.Items[6].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[6].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[6].Entry.SlotSize}"
@@ -717,7 +711,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot7"
+                <Grid Name="ItemSlot8"
                       Grid.Row="{Binding Inventory.Items[7].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[7].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[7].Entry.SlotSize}"
@@ -771,7 +765,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot8"
+                <Grid Name="ItemSlot9"
                       Grid.Row="{Binding Inventory.Items[8].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[8].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[8].Entry.SlotSize}"
@@ -825,7 +819,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot9"
+                <Grid Name="ItemSlot10"
                       Grid.Row="{Binding Inventory.Items[9].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[9].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[9].Entry.SlotSize}"
@@ -879,7 +873,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot10"
+                <Grid Name="ItemSlot11"
                       Grid.Row="{Binding Inventory.Items[10].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[10].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[10].Entry.SlotSize}"
@@ -888,6 +882,9 @@
                         <Style TargetType="{x:Type Grid}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Inventory.Items[10].Entry.IsEmpty}" Value="true">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Options.ShowEquipment}" Value="true">
                                     <Setter Property="Visibility" Value="Hidden" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -908,6 +905,13 @@
                                     <DataTrigger Binding="{Binding Inventory.Items[10].Entry.HasQuantity}" Value="false">
                                         <Setter Property="Visibility" Value="Hidden" />
                                     </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions >
+                                            <Condition Binding="{Binding Inventory.Items[10].Entry.IsInfinite}" Value="false" />
+                                            <Condition Binding="{Binding Inventory.Items[10].Entry.Quantity}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Foreground" Value="DarkRed" />
+                                    </MultiDataTrigger>
                                     <DataTrigger Binding="{Binding Inventory.Items[10].Entry.IsAcid}" Value="true">
                                         <Setter Property="Foreground" Value="Yellow" />
                                     </DataTrigger>
@@ -920,70 +924,6 @@
                                     <DataTrigger Binding="{Binding Inventory.Items[10].Entry.IsInfinite}" Value="true">
                                         <Setter Property="Content" Value="∞" />
                                     </DataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions >
-                                            <Condition Binding="{Binding Inventory.Items[10].Entry.IsInfinite}" Value="false" />
-                                            <Condition Binding="{Binding Inventory.Items[10].Entry.Quantity}" Value="0" />
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" Value="DarkRed" />
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Label.Style>
-                    </Label>
-                </Grid>
-
-                <Grid Name="ItemSlot11"
-                      Grid.Row="{Binding Inventory.Items[11].Entry.SlotRow}" 
-                      Grid.Column="{Binding Inventory.Items[11].GridColumn}" 
-                      Grid.ColumnSpan="{Binding Inventory.Items[11].Entry.SlotSize}"
-                      ToolTip="{Binding Inventory.Items[11].Entry.Name}">
-                    <Grid.Style>
-                        <Style TargetType="{x:Type Grid}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Inventory.Items[11].Entry.IsEmpty}" Value="true">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Options.ShowEquipment}" Value="true">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Grid.Style>
-                    <Rectangle>
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Inventory.Items[11].Clipping}"/>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Label VerticalAlignment="Bottom">
-                        <Label.Style>
-                            <Style TargetType="{x:Type Label}">
-                                <Setter Property="FontSize" Value="18" />
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter Property="Content" Value="{Binding Inventory.Items[11].Entry.Quantity}" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Inventory.Items[11].Entry.HasQuantity}" Value="false">
-                                        <Setter Property="Visibility" Value="Hidden" />
-                                    </DataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions >
-                                            <Condition Binding="{Binding Inventory.Items[11].Entry.IsInfinite}" Value="false" />
-                                            <Condition Binding="{Binding Inventory.Items[11].Entry.Quantity}" Value="0" />
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Foreground" Value="DarkRed" />
-                                    </MultiDataTrigger>
-                                    <DataTrigger Binding="{Binding Inventory.Items[11].Entry.IsAcid}" Value="true">
-                                        <Setter Property="Foreground" Value="Yellow" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Inventory.Items[11].Entry.IsBOW}" Value="true">
-                                        <Setter Property="Foreground" Value="LawnGreen" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Inventory.Items[11].Entry.IsFlame}" Value="true">
-                                        <Setter Property="Foreground" Value="Red" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Inventory.Items[11].Entry.IsInfinite}" Value="true">
-                                        <Setter Property="Content" Value="∞" />
-                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Label.Style>
@@ -994,15 +934,10 @@
             <Grid Name="EquipmentPanel" Grid.Column="1">
                 <Grid.Style>
                     <Style TargetType="{x:Type Grid}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Options.ShowInventory}" Value="true" />
-                                    <Condition Binding="{Binding Options.ShowEquipment}" Value="true" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </MultiDataTrigger>
+                            <DataTrigger Binding="{Binding Options.ShowInventory}" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Grid.Style>
@@ -1019,19 +954,19 @@
                            Grid.Column="0" 
                            Grid.ColumnSpan="2"
                            HorizontalAlignment="Center"
-                           Width="{Binding Inventory.Items[0].ClipWidth}"
-                           ToolTip="{Binding Inventory.Items[0].Entry.Name}">
+                           Width="{Binding Equipment.ClipWidth}"
+                           ToolTip="{Binding Equipment.Entry.Name}">
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsEmpty}" Value="true">
+                                <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
                                     <Setter Property="Visibility" Value="Hidden" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Rectangle.Style>
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Inventory.Items[0].Clipping}"/>
+                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping}"/>
                     </Rectangle.Fill>
                 </Rectangle>
                 <Label Name="EquipmentOnlyLabel"
@@ -1042,30 +977,30 @@
                         <Style TargetType="{x:Type Label}">
                             <Setter Property="FontSize" Value="18" />
                             <Setter Property="Foreground" Value="White" />
-                            <Setter Property="Content" Value="{Binding Inventory.Items[0].Entry.Quantity}" />
+                            <Setter Property="Content" Value="{Binding Equipment.Entry.Quantity}" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsEmpty}" Value="true">
+                                <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
                                     <Setter Property="Visibility" Value="Hidden" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.HasQuantity}" Value="false">
+                                <DataTrigger Binding="{Binding Equipment.Entry.HasQuantity}" Value="false">
                                     <Setter Property="Visibility" Value="Hidden" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsAcid}" Value="true">
+                                <DataTrigger Binding="{Binding Equipment.Entry.IsAcid}" Value="true">
                                     <Setter Property="Foreground" Value="Yellow" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsBOW}" Value="true">
+                                <DataTrigger Binding="{Binding Equipment.Entry.IsBOW}" Value="true">
                                     <Setter Property="Foreground" Value="LawnGreen" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsFlame}" Value="true">
+                                <DataTrigger Binding="{Binding Equipment.Entry.IsFlame}" Value="true">
                                     <Setter Property="Foreground" Value="Red" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Inventory.Items[0].Entry.IsInfinite}" Value="true">
+                                <DataTrigger Binding="{Binding Equipment.Entry.IsInfinite}" Value="true">
                                     <Setter Property="Content" Value="∞" />
                                 </DataTrigger>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions >
-                                        <Condition Binding="{Binding Inventory.Items[0].Entry.IsInfinite}" Value="false" />
-                                        <Condition Binding="{Binding Inventory.Items[0].Entry.Quantity}" Value="0" />
+                                        <Condition Binding="{Binding Equipment.Entry.IsInfinite}" Value="false" />
+                                        <Condition Binding="{Binding Equipment.Entry.Quantity}" Value="0" />
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Foreground" Value="DarkRed" />
                                 </MultiDataTrigger>
