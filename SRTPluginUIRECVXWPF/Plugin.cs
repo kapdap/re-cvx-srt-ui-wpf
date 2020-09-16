@@ -52,6 +52,11 @@ namespace SRTPluginUIRECVXWPF
 
             try
             {
+                UIDispatcher.Invoke(delegate
+                {
+                    Windows.CloseAll();
+                    Models.DisposeAll();
+                });
                 UIDispatcher.InvokeShutdown();
                 return 0;
             }
@@ -59,6 +64,11 @@ namespace SRTPluginUIRECVXWPF
             {
                 ShowExceptionMessage(ex);
                 return 1;
+            }
+            finally
+            {
+                UIDispatcher = null;
+                IsExiting = false;
             }
         }
 
@@ -70,22 +80,50 @@ namespace SRTPluginUIRECVXWPF
 
         public static class Windows
         {
-            public static MainWindow Main { get; } = new MainWindow();
-            public static OptionsWindow Options { get; } = new OptionsWindow();
+            private static MainWindow _main;
+            public static MainWindow Main
+            {
+                get
+                {
+                    if (_main == null)
+                        _main = new MainWindow();
+                    return _main;
+                }
+                set => _main = value;
+            }
+
+            private static OptionsWindow _options;
+            public static OptionsWindow Options
+            { 
+                get
+                {
+                    if (_options == null)
+                        _options = new OptionsWindow();
+                    return _options;
+                } 
+                set => _options = value; 
+            }
 
             public static void CloseAll()
             {
-                CloseWindow(Options);
-                CloseWindow(Main);
+                CloseWindow(_options);
+                CloseWindow(_main);
+
+                _options = null;
+                _main = null;
             }
 
-            private static void CloseWindow(Window window)
+            public static void CloseWindow(Window window)
             {
+                if (window == null)
+                    return;
+
                 try
                 {
                     window.Close();
                 }
-                catch(Exception ex)
+                catch (InvalidOperationException) { }
+                catch (Exception ex)
                 {
                     ShowExceptionMessage(ex);
                 }
@@ -94,7 +132,22 @@ namespace SRTPluginUIRECVXWPF
 
         public static class Models
         {
-            public static AppViewModel AppView { get; } = new AppViewModel();
+            private static AppViewModel _appView;
+            public static AppViewModel AppView
+            {
+                get
+                {
+                    if (_appView == null)
+                        _appView = new AppViewModel();
+                    return _appView;
+                }
+                set => _appView = value;
+            }
+
+            public static void DisposeAll()
+            {
+                _appView = null;
+            }
         }
     }
 }
