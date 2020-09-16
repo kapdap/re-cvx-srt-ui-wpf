@@ -16,16 +16,11 @@ namespace SRTPluginUIRECVXWPF
         public int Startup(IPluginHostDelegates hostDelegates)
         {
             HostDelegates = hostDelegates;
-            Plugin.Initialize(this);
-            return 0;
+            return Plugin.Initialize(this);
         }
 
-        public int Shutdown()
-        {
+        public int Shutdown() =>
             Plugin.Exit();
-            Dispatcher.CurrentDispatcher.InvokeShutdown();
-            return 0;
-        }
 
         public int ReceiveData(object gameMemory)
         {

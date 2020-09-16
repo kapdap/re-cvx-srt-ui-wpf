@@ -2,6 +2,7 @@
 using System;
 using System.Reflection;
 using System.Threading;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace SRTPluginUIRECVXWPF
@@ -11,34 +12,54 @@ namespace SRTPluginUIRECVXWPF
         public static bool IsExiting { get; private set; }
 
         public static PluginUI PluginUI { get; private set; }
-        public static Thread UIThread { get; private set; }
+        public static Dispatcher UIDispatcher { get; private set; }
 
         public static readonly string Version = String.Format("v{0}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
-        public static void Initialize(PluginUI plugin)
+        public static int Initialize(PluginUI plugin)
         {
             PluginUI = plugin;
 
-            // https://stackoverflow.com/a/36006943
-            ThreadStart ts = new ThreadStart(() =>
+            try
             {
-                ActivateWindow();
-                Dispatcher.Run();
-            });
+                // https://stackoverflow.com/a/36006943
+                Thread t = new Thread(new ThreadStart(() =>
+                {
+                    UIDispatcher = Dispatcher.CurrentDispatcher;
+                    UIDispatcher.Invoke(delegate
+                    {
+                        Windows.Main.Show();
+                    });
+                    Dispatcher.Run();
+                }));
 
-            UIThread = new Thread(ts);
-            UIThread.SetApartmentState(ApartmentState.STA);
-            UIThread.IsBackground = true;
-            UIThread.Start();
+                t.SetApartmentState(ApartmentState.STA);
+                t.IsBackground = true;
+                t.Start();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                ShowExceptionMessage(ex);
+                return 1;
+            }
         }
 
-        public static void ActivateWindow() =>
-            Windows.Main.Show();
-
-        public static void Exit()
+        public static int Exit()
         {
             IsExiting = true;
-            Windows.CloseAll();
+
+            try
+            {
+                UIDispatcher.InvokeShutdown();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                ShowExceptionMessage(ex);
+                return 1;
+            }
         }
 
         public static void ShowMessage(string message) =>
@@ -54,7 +75,20 @@ namespace SRTPluginUIRECVXWPF
 
             public static void CloseAll()
             {
-                Options.Close();
+                CloseWindow(Options);
+                CloseWindow(Main);
+            }
+
+            private static void CloseWindow(Window window)
+            {
+                try
+                {
+                    window.Close();
+                }
+                catch(Exception ex)
+                {
+                    ShowExceptionMessage(ex);
+                }
             }
         }
 
