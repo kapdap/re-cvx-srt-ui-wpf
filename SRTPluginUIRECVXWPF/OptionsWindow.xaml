@@ -26,15 +26,15 @@
         <StackPanel>
             <StackPanel Margin="15,10,15,0" Orientation="Horizontal">
                 <StackPanel Width="155">
-                <GroupBox Header="Game" Padding="5">
-                    <StackPanel>
-                        <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
-                        <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
-                        <CheckBox Content="Only Equipped"   IsChecked="{Binding Options.ShowEquipment}"  Margin="20,0,0,10" ToolTip="Only show the currently equipped item." IsEnabled="{Binding Options.ShowInventory}" />
-                        <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
-                        <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
-                        <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,0"  ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
-                    </StackPanel>
+                    <GroupBox Header="Game" Padding="5">
+                        <StackPanel>
+                            <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
+                            <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
+                            <CheckBox Content="Only Equipped"   IsChecked="{Binding Options.ShowEquipment}"  Margin="20,0,0,10" ToolTip="Only show the currently equipped item." IsEnabled="{Binding Options.ShowInventory}" />
+                            <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
+                            <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
+                            <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,0"  ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
+                        </StackPanel>
                     </GroupBox>
                 </StackPanel>
                 <StackPanel Width="155" Margin="10,0,10,0">
@@ -43,9 +43,9 @@
                             <DockPanel VerticalAlignment="Center" Margin="0,0,0,10">
                                 <Label Grid.Column="0" Content="Text" Width="52" Padding="0,0,0,0" />
                                 <ComboBox Grid.Column="1"
-                                          SelectedValuePath="Content" 
-                                          SelectedValue="{Binding Options.TextSize}" 
-                                          Padding="6,0,5,1" 
+                                          SelectedValuePath="Content"
+                                          SelectedValue="{Binding Options.TextSize}"
+                                          Padding="6,0,5,1"
                                           DockPanel.Dock="Right"
                                           ToolTip="Adjust scale of text in the main window.">
                                     <ComboBoxItem Content="Normal" />
@@ -57,9 +57,9 @@
                             <DockPanel VerticalAlignment="Center" Margin="0,0,0,10">
                                 <Label Grid.Column="0" Content="Icons" Width="52" Padding="0,0,0,0" />
                                 <ComboBox Grid.Column="1"
-                                          SelectedValuePath="Content" 
-                                          SelectedValue="{Binding Options.IconSize}" 
-                                          Padding="6,0,5,1" 
+                                          SelectedValuePath="Content"
+                                          SelectedValue="{Binding Options.IconSize}"
+                                          Padding="6,0,5,1"
                                           DockPanel.Dock="Right"
                                           ToolTip="Adjust scale of the inventory icons.">
                                     <ComboBoxItem Content="Normal" />
@@ -71,9 +71,9 @@
                             <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
                                 <Label Grid.Column="0" Content="Health" Width="52" Padding="0,0,0,0" />
                                 <ComboBox Grid.Column="1"
-                                          SelectedValuePath="Content" 
-                                          SelectedValue="{Binding Options.HealthSize}" 
-                                          Padding="6,0,5,1" 
+                                          SelectedValuePath="Content"
+                                          SelectedValue="{Binding Options.HealthSize}"
+                                          Padding="6,0,5,1"
                                           DockPanel.Dock="Right"
                                           ToolTip="Adjust scale of health status image.">
                                     <ComboBoxItem Content="Normal" />
@@ -86,18 +86,18 @@
                     </GroupBox>
                     <GroupBox Header="Opacity" Padding="5">
                         <DockPanel VerticalAlignment="Center">
-                            <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}" 
+                            <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
                                      ToolTip="Move slider to adjust the opacity level of text and icons."
                                      DockPanel.Dock="Right"
                                      TextAlignment="Right"
                                      Width="35" />
-                            <Slider Name="OpacitySlider" 
-                                    Value="{Binding Options.Opacity}" 
+                            <Slider Name="OpacitySlider"
+                                    Value="{Binding Options.Opacity}"
                                     ToolTip="Move slider to adjust the opacity level of text and icons."
-                                    Minimum="0.05" 
+                                    Minimum="0.05"
                                     Maximum="1"
-                                    TickFrequency="0.1" 
-                                    TickPlacement="BottomRight" 
+                                    TickFrequency="0.1"
+                                    TickPlacement="BottomRight"
                                     Margin="0,0,5,0" />
                         </DockPanel>
                     </GroupBox>
