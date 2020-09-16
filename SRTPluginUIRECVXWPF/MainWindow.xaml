@@ -333,7 +333,7 @@
                     <ColumnDefinition Width="112" />
                 </Grid.ColumnDefinitions>
 
-                <Grid Name="ItemSlot1"
+                <Grid Name="ItemSlot0"
                       Grid.Row="{Binding Inventory.Items[0].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[0].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[0].Entry.SlotSize}"
@@ -387,7 +387,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot2" 
+                <Grid Name="ItemSlot1" 
                       Grid.Row="{Binding Inventory.Items[1].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[1].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[1].Entry.SlotSize}"
@@ -441,7 +441,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot3"
+                <Grid Name="ItemSlot2"
                       Grid.Row="{Binding Inventory.Items[2].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[2].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[2].Entry.SlotSize}"
@@ -495,7 +495,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot4"
+                <Grid Name="ItemSlot3"
                       Grid.Row="{Binding Inventory.Items[3].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[3].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[3].Entry.SlotSize}"
@@ -549,7 +549,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot5"
+                <Grid Name="ItemSlot4"
                       Grid.Row="{Binding Inventory.Items[4].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[4].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[4].Entry.SlotSize}"
@@ -603,7 +603,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot6"
+                <Grid Name="ItemSlot5"
                       Grid.Row="{Binding Inventory.Items[5].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[5].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[5].Entry.SlotSize}"
@@ -657,7 +657,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot7"
+                <Grid Name="ItemSlot6"
                       Grid.Row="{Binding Inventory.Items[6].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[6].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[6].Entry.SlotSize}"
@@ -711,7 +711,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot8"
+                <Grid Name="ItemSlot7"
                       Grid.Row="{Binding Inventory.Items[7].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[7].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[7].Entry.SlotSize}"
@@ -765,7 +765,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot9"
+                <Grid Name="ItemSlot8"
                       Grid.Row="{Binding Inventory.Items[8].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[8].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[8].Entry.SlotSize}"
@@ -819,7 +819,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot10"
+                <Grid Name="ItemSlot9"
                       Grid.Row="{Binding Inventory.Items[9].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[9].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[9].Entry.SlotSize}"
@@ -873,7 +873,7 @@
                     </Label>
                 </Grid>
 
-                <Grid Name="ItemSlot11"
+                <Grid Name="ItemSlot10"
                       Grid.Row="{Binding Inventory.Items[10].Entry.SlotRow}" 
                       Grid.Column="{Binding Inventory.Items[10].GridColumn}" 
                       Grid.ColumnSpan="{Binding Inventory.Items[10].Entry.SlotSize}"
