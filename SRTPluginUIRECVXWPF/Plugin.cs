@@ -52,12 +52,16 @@ namespace SRTPluginUIRECVXWPF
 
             try
             {
-                UIDispatcher.Invoke(delegate
+                if (UIDispatcher != null)
                 {
-                    Windows.CloseAll();
-                    Models.DisposeAll();
-                });
-                UIDispatcher.InvokeShutdown();
+                    UIDispatcher.Invoke(delegate
+                    {
+                        Windows.CloseAll();
+                        Models.DisposeAll();
+                    });
+                    UIDispatcher.InvokeShutdown();
+                }
+
                 return 0;
             }
             catch (Exception ex)
