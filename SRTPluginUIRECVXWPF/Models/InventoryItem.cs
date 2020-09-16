@@ -24,20 +24,6 @@ namespace SRTPluginUIRECVXWPF.Models
             }
         }
 
-        private int _gridColumn;
-        public int GridColumn
-        {
-            get => _gridColumn;
-            set
-            {
-                if (_gridColumn != value)
-                {
-                    _gridColumn = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private int _clipX;
         public int ClipX
         {
@@ -108,27 +94,12 @@ namespace SRTPluginUIRECVXWPF.Models
             }
         }
 
-        private bool _showQuantity = true;
-        public bool ShowQuantity
-        {
-            get => _showQuantity;
-            set
-            {
-                if (_showQuantity != value)
-                {
-                    _showQuantity = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public InventoryItem(InventoryEntry entry)
         {
             Entry = entry;
             Entry.PropertyChanged += UpdatePropertyEvent;
 
             UpdateClipping();
-            UpdateGridColumn();
         }
 
         private void UpdatePropertyEvent(object sender, PropertyChangedEventArgs e)
@@ -137,11 +108,7 @@ namespace SRTPluginUIRECVXWPF.Models
                 return;
 
             UpdateClipping();
-            UpdateGridColumn();
         }
-
-        private void UpdateGridColumn() =>
-            GridColumn = Entry.SlotColumn + 1;
 
         private void UpdateClipping()
         {
