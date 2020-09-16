@@ -15,8 +15,12 @@ namespace SRTPluginUIRECVXWPF.Models
             if (entries == null)
                 return;
 
+            Items.Clear();
+
             for (int i = 0; i < entries.Length; i++)
                 Items.Add(new InventoryItem(entries[i]));
+
+            OnPropertyChanged("Items");
         }
     }
 }
