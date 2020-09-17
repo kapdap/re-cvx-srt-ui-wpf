@@ -355,6 +355,9 @@
                             <Grid.Style>
                                 <Style TargetType="{x:Type Grid}">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Entry.SlotRow}" Value="6">
+                                            <Setter Property="Visibility" Value="Hidden" />
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Entry.IsEmpty}" Value="true">
                                             <Setter Property="Visibility" Value="Hidden" />
                                         </DataTrigger>
