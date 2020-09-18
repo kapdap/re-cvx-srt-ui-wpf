@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace SRTPluginUIRECVXWPF
 {
@@ -28,6 +29,12 @@ namespace SRTPluginUIRECVXWPF
 
         private void CloseWindowButton_Click(object sender, RoutedEventArgs e) =>
             Close();
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {

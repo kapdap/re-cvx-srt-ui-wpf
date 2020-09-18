@@ -37,7 +37,7 @@ namespace SRTPluginUIRECVXWPF.Models
             get
             {
                 if (_showTitlebar == null)
-                    _showTitlebar = RegistryHelper.GetBoolValue(_readKey, "ShowTitlebar", true);
+                    _showTitlebar = RegistryHelper.GetBoolValue(_readKey, "ShowTitlebar", false);
                 return (bool)_showTitlebar;
             }
             set

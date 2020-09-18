@@ -13,7 +13,8 @@
         AllowsTransparency="True"
         WindowStyle="None"
         UseLayoutRounding="True"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        MouseDown="Window_MouseDown">
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBackground"
                          Color="{Binding Options.Background}" />

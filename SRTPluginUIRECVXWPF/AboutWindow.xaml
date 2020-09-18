@@ -33,7 +33,7 @@
         </StackPanel.Resources>
 
         <uc:TitlebarControl ShowMinimizeButton="False" ShowMaximizeButton="False" />
-        <Grid Margin="15,10,15,15">
+        <Grid Margin="15,10,15,5">
             <StackPanel>
                 <StackPanel Margin="0,0,0,13">
                     <Label Content="RE CVX SRT" FontSize="36" Padding="0,0,0,0" Margin="0,0,0,10"></Label>
@@ -69,10 +69,13 @@
                     </Grid>
                     <Label Content="RE CVX SRT is a speedrun tool for Resident Evil/Biohazard: Code: Veronica." Padding="0,0,0,0" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
                     <Label Content="Website" Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="WebsiteLink" MouseUp="WebsiteLink_MouseUp" />
                     <Label Content="GitHub"  Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="GitHubLink" MouseUp="GitHubLink_MouseUp" />
                     <Label Content="License" Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="LicenseLink" MouseUp="LicenseLink_MouseUp" />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center">
+                    <Label Content="©2020+" Padding="0,0,0,0" FontSize="10" />
                 </StackPanel>
             </StackPanel>
         </Grid>
