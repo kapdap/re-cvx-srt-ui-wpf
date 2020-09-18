@@ -445,23 +445,6 @@ namespace SRTPluginUIRECVXWPF.Models
                     return GenerateClipping(6, 19, Entry.SlotSize);
 
                 // No Icon (Unused Content)
-                case ItemEnumeration.Card:
-                case ItemEnumeration.CrestKeyS:
-                case ItemEnumeration.CrestKeyG:
-                case ItemEnumeration.EmptyExtinguisher:
-                case ItemEnumeration.FileFolders:
-                case ItemEnumeration.Memo:
-                case ItemEnumeration.NewspaperClip:
-                case ItemEnumeration.SquareSocket:
-                case ItemEnumeration.RemoteController:
-                case ItemEnumeration.QueenAntReliefComplete:
-                case ItemEnumeration.QuestionA:
-                case ItemEnumeration.QuestionB:
-                case ItemEnumeration.QuestionC:
-                case ItemEnumeration.QuestionD:
-                case ItemEnumeration.QuestionE:
-                case ItemEnumeration.Unknown:
-                case ItemEnumeration.None:
                 default:
                     return GenerateClipping(0, 0, Entry.SlotSize);
             }

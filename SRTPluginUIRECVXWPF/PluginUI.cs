@@ -1,6 +1,5 @@
 ﻿using SRTPluginBase;
 using SRTPluginProviderRECVX;
-using System.Windows.Threading;
 
 namespace SRTPluginUIRECVXWPF
 {

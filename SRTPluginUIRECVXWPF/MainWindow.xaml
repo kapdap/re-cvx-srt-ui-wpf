@@ -199,10 +199,10 @@
                             <Setter Property="Padding" Value="5,0,0,0" />
                         </Style>
                     </StackPanel.Resources>
-                    <Label Name="RunningTimerLabel" Content="{Binding GameMemory.IGT.RunningTimer}"    ContentStringFormat="T: {0:#0000000000}" />
-                    <Label Name="VersionCodeLabel"  Content="{Binding GameMemory.Version.Code}"        ContentStringFormat="C: {0}" />
-                    <Label Name="ProcessNameLabel"  Content="{Binding GameMemory.Process.ProcessName}" ContentStringFormat="P: {0}" />
-                    <Label Name="ProcessIdLabel"    Content="{Binding GameMemory.Process.Id}"          ContentStringFormat="I: {0}" />
+                    <Label Name="RunningTimerLabel" Content="{Binding GameMemory.IGT.RunningTimer}"     ContentStringFormat="T: {0:#0000000000}" />
+                    <Label Name="VersionCodeLabel"  Content="{Binding GameMemory.Version.Code}"         ContentStringFormat="C: {0}" />
+                    <Label Name="ProcessNameLabel"  Content="{Binding GameMemory.Emulator.ProcessName}" ContentStringFormat="P: {0}" />
+                    <Label Name="ProcessIdLabel"    Content="{Binding GameMemory.Emulator.Id}"          ContentStringFormat="I: {0}" />
                 </StackPanel>
 
                 <StackPanel Name="StatsPanel"

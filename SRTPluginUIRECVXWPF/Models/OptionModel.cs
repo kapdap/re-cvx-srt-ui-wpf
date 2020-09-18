@@ -58,7 +58,6 @@ namespace SRTPluginUIRECVXWPF.Models
             {
                 if (_background == null)
                 {
-                    
                     byte[] bytes = BitConverter.GetBytes(RegistryHelper.GetValue(_readKey, "Background", System.Drawing.Color.Black.ToArgb()));
                     _background = Color.FromArgb(bytes[3], bytes[2], bytes[1], bytes[0]);
                 }
