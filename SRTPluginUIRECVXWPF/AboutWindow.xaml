@@ -42,7 +42,8 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto"  />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -51,17 +52,20 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Content="User Interface:" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
-                        <Label Grid.Column="1" Grid.Row="0" Content="SRTPluginUIRECVXWPF" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
+                        <Label Grid.Column="1" Grid.Row="0" Content="{Binding PluginName}" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
                         <Label Grid.Column="2" Grid.Row="0" Content="{Binding PluginVersion}" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
                         <Label Grid.Column="3" Grid.Row="0" Content="Website" Padding="0,0,0,0" FontWeight="Bold" Style="{StaticResource UnderlineLabel}" Name="UserInterfaceLink" MouseUp="UserInterfaceLink_MouseUp" />
+                        <Label Grid.Column="4" Grid.Row="0" Content="GitHub" Padding="0,0,0,0" FontWeight="Bold" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="UserInterfaceGitLink" MouseUp="UserInterfaceGitLink_MouseUp" />
 
                         <Label Grid.Column="0" Grid.Row="1" Content="Memory Provider:" Padding="0,0,0,0" Margin="0,0,10,0" />
-                        <Label Grid.Column="1" Grid.Row="1" Content="SRTPluginProviderRECVXSRT" Padding="0,0,0,0" Margin="0,0,10,0" />
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding PluginProvider}" Padding="0,0,0,0" Margin="0,0,10,0" />
                         <Label Grid.Column="3" Grid.Row="1" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="MemoryProviderLink" MouseUp="MemoryProviderLink_MouseUp" />
+                        <Label Grid.Column="4" Grid.Row="1" Content="GitHub" Padding="0,0,0,0" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="MemoryProviderGitLink" MouseUp="MemoryProviderGitLink_MouseUp" />
 
                         <Label Grid.Column="0" Grid.Row="2" Content="Plugin Host:" Padding="0,0,0,0" Margin="0,0,10,0" />
                         <Label Grid.Column="1" Grid.Row="2" Content="SRTHost" Padding="0,0,0,0" Margin="0,0,10,0" />
-                        <Label Grid.Column="3" Grid.Row="2" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="PluginHostLink" MouseUp="PluginHostLink_MouseUp" />
+                        <Label Grid.Column="3" Grid.Row="2" Content="Website" Padding="0,0,0,0" Margin="0,0,10,0" Style="{StaticResource UnderlineLabel}" Name="PluginHostLink" MouseUp="PluginHostLink_MouseUp" />
+                        <Label Grid.Column="4" Grid.Row="2" Content="GitHub" Padding="0,0,0,0" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="PluginHostGitLink" MouseUp="PluginHostGitLink_MouseUp" />
                     </Grid>
                     <Label Content="RE CVX SRT is a speedrun tool for Resident Evil/Biohazard: Code: Veronica." Padding="0,0,0,0" />
                 </StackPanel>

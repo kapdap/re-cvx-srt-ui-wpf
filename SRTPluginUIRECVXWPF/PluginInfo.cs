@@ -11,7 +11,7 @@ namespace SRTPluginUIRECVXWPF
 
         public string Author => "Kapdap";
 
-        public Uri MoreInfoURL => new Uri("https://github.com/kapdap/re-cvx-srt-ui-wpf");
+        public Uri MoreInfoURL => new Uri("https://kapdap.github.io/re-cvx-srt/");
 
         public int VersionMajor => assemblyFileVersion.ProductMajorPart;
 

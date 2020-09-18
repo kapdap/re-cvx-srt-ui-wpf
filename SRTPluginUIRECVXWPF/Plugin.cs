@@ -14,6 +14,7 @@ namespace SRTPluginUIRECVXWPF
         public static PluginUI PluginUI { get; private set; }
         public static Dispatcher UIDispatcher { get; private set; }
 
+        public static readonly string Name = Assembly.GetExecutingAssembly().GetName().Name.ToString();
         public static readonly string Version = String.Format("v{0}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
         public static int Initialize(PluginUI plugin)

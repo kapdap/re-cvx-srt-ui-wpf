@@ -1,4 +1,5 @@
-﻿using SRTPluginProviderRECVX;
+﻿using SRTPluginBase;
+using SRTPluginProviderRECVX;
 using SRTPluginProviderRECVX.Models;
 using SRTPluginUIRECVXWPF.Models;
 using System;
@@ -7,7 +8,11 @@ namespace SRTPluginUIRECVXWPF.ViewModels
 {
     public class AppViewModel : BaseNotifyModel
     {
+        public IPluginInfo PluginInfo => Plugin.PluginUI.Info;
+
+        public string PluginName => Plugin.Name;
         public string PluginVersion => Plugin.Version;
+        public string PluginProvider => Plugin.PluginUI.RequiredProvider;
         public string PluginTitle => String.Format("RE CVX SRT {0}", Plugin.Version);
 
         public OptionModel Options { get; } = new OptionModel();

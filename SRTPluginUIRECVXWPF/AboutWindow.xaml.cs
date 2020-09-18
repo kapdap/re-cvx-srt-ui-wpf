@@ -33,13 +33,22 @@ namespace SRTPluginUIRECVXWPF
         }
 
         private void UserInterfaceLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://kapdap.github.io/re-cvx-srt/");
+
+        private void UserInterfaceGitLink_MouseUp(object sender, MouseButtonEventArgs e) =>
             URLHelper.OpenURL("https://github.com/kapdap/re-cvx-srt-ui-wpf");
 
         private void MemoryProviderLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://kapdap.github.io/re-cvx-srt/");
+
+        private void MemoryProviderGitLink_MouseUp(object sender, MouseButtonEventArgs e) =>
             URLHelper.OpenURL("https://github.com/kapdap/re-cvx-srt-provider");
 
         private void PluginHostLink_MouseUp(object sender, MouseButtonEventArgs e) =>
             URLHelper.OpenURL("https://www.neonblu.com/SRT/");
+
+        private void PluginHostGitLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://github.com/Squirrelies/SRTHost");
 
         private void WebsiteLink_MouseUp(object sender, MouseButtonEventArgs e) =>
             URLHelper.OpenURL("https://kapdap.github.io/re-cvx-srt/");
