@@ -80,7 +80,7 @@ namespace SRTPluginUIRECVXWPF.Models
             get
             {
                 if (_transparent == null)
-                    _transparent = RegistryHelper.GetBoolValue(_readKey, "Transparent", true);
+                    _transparent = RegistryHelper.GetBoolValue(_readKey, "Transparent", false);
                 return (bool)_transparent;
             }
             set
