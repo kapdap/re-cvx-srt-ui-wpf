@@ -122,7 +122,12 @@
                 </StackPanel.Resources>
 
                 <Grid Name="StatusImageGrid">
-                    <Image Name="StatusImage">
+                    <Grid.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding Options.StatusScale}"
+                                        ScaleY="{Binding Options.StatusScale}"/>
+                    </Grid.LayoutTransform>
+                    <Image Name="StatusImage"
+                           HorizontalAlignment="Left">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="uc:ImageBehavior.AnimatedSource" Value="/SRTPluginUIRECVXWPF;component/Resources/STATUS.gif" />
@@ -186,302 +191,322 @@
                     </Label>
                 </Grid>
 
-                <Label Name="TimerLabel"
-                       Content="{Binding GameMemory.IGT.FormattedString}"
-                       Style="{StaticResource TimerLabelStyle}" />
+                <StackPanel>
+                    <StackPanel.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding Options.TextScale}"
+                                        ScaleY="{Binding Options.TextScale}"/>
+                    </StackPanel.LayoutTransform>
+                    <Label Name="TimerLabel"
+                           Content="{Binding GameMemory.IGT.FormattedString}"
+                           Style="{StaticResource TimerLabelStyle}">
+                    </Label>
 
-                <StackPanel Name="DebugPanel"
-                            Margin="0,0,0,10"
-                            Style="{StaticResource DebugPanelStyle}">
-                    <StackPanel.Resources>
-                        <Style TargetType="{x:Type Label}">
-                            <Setter Property="Foreground" Value="Gray" />
-                            <Setter Property="Padding" Value="5,0,0,0" />
-                        </Style>
-                    </StackPanel.Resources>
-                    <Label Name="RunningTimerLabel" Content="{Binding GameMemory.IGT.RunningTimer}"     ContentStringFormat="T: {0:#0000000000}" />
-                    <Label Name="VersionCodeLabel"  Content="{Binding GameMemory.Version.Code}"         ContentStringFormat="C: {0}" />
-                    <Label Name="ProcessNameLabel"  Content="{Binding GameMemory.Emulator.ProcessName}" ContentStringFormat="P: {0}" />
-                    <Label Name="ProcessIdLabel"    Content="{Binding GameMemory.Emulator.Id}"          ContentStringFormat="I: {0}" />
-                </StackPanel>
+                    <StackPanel Name="DebugPanel"
+                                Margin="0,0,0,10"
+                                Style="{StaticResource DebugPanelStyle}">
+                        <StackPanel.LayoutTransform>
+                            <ScaleTransform ScaleX="{Binding Options.TextScale}"
+                                            ScaleY="{Binding Options.TextScale}"/>
+                        </StackPanel.LayoutTransform>
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="Gray" />
+                                <Setter Property="Padding" Value="5,0,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <Label Name="RunningTimerLabel" Content="{Binding GameMemory.IGT.RunningTimer}"     ContentStringFormat="T: {0:#0000000000}" />
+                        <Label Name="VersionCodeLabel"  Content="{Binding GameMemory.Version.Code}"         ContentStringFormat="C: {0}" />
+                        <Label Name="ProcessNameLabel"  Content="{Binding GameMemory.Emulator.ProcessName}" ContentStringFormat="P: {0}" />
+                        <Label Name="ProcessIdLabel"    Content="{Binding GameMemory.Emulator.Id}"          ContentStringFormat="I: {0}" />
+                    </StackPanel>
 
-                <StackPanel Name="StatsPanel"
+                    <StackPanel Name="StatsPanel"
                             Margin="0,0,0,5"
                             Style="{StaticResource StatsPanelStyle}">
-                    <StackPanel.Resources>
-                        <Style TargetType="{x:Type Label}">
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter Property="Padding" Value="5,0,0,0" />
-                        </Style>
-                    </StackPanel.Resources>
-                    <Label Name="StatusLabel"  Content="{Binding GameMemory.Player.StatusName}" ContentStringFormat=" Status: {0}" />
-                    <Label Name="SavesLabel"   Content="{Binding GameMemory.Player.Saves}"      ContentStringFormat="  Saves: {0}" />
-                    <Label Name="RetryLabel"   Content="{Binding GameMemory.Player.Retry}"      ContentStringFormat="  Retry: {0}" />
-                    <Label Name="FASLabel"     Content="{Binding GameMemory.Player.FAS}"        ContentStringFormat="  F.A.S: {0}" />
-                    <Label Name="MapLabel"     Content="{Binding GameMemory.Player.Map}"        ContentStringFormat="    Map: {0}" />
-                    <Label Name="SteveLabel"   Content="{Binding GameMemory.Player.Steve}"      ContentStringFormat="  Steve: {0}" />
-                    <Label Name="RodrigoLabel" Content="{Binding GameMemory.Player.Rodrigo}"    ContentStringFormat="Rodrigo: {0}" />
-                    <Label Name="ScoreLabel"   Content="{Binding GameMemory.Player.Score}"      ContentStringFormat="  Score: {0}" />
-                    <Label Name="RankLabel"    Content="{Binding GameMemory.Player.Rank}"       ContentStringFormat="   Rank: {0}" />
-                </StackPanel>
-
-                <StackPanel Name="EnemyPanel"
-                            Style="{StaticResource EnemyPanelStyle}"
-                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                    <Label Name="EnemyLabel">
-                        <Label.Style>
+                        <StackPanel.Resources>
                             <Style TargetType="{x:Type Label}">
-                                <Setter Property="Foreground" Value="Red" />
-                                <Setter Property="Content" Value="Enemy HP" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Options.ShowBosses}" Value="True">
-                                        <Setter Property="Content" Value="Boss HP" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Padding" Value="5,0,0,0" />
                             </Style>
-                        </Label.Style>
-                    </Label>
-                    <ListView Name="EnemyList"
+                        </StackPanel.Resources>
+                        <Label Name="StatusLabel"  Content="{Binding GameMemory.Player.StatusName}" ContentStringFormat=" Status: {0}" />
+                        <Label Name="SavesLabel"   Content="{Binding GameMemory.Player.Saves}"      ContentStringFormat="  Saves: {0}" />
+                        <Label Name="RetryLabel"   Content="{Binding GameMemory.Player.Retry}"      ContentStringFormat="  Retry: {0}" />
+                        <Label Name="FASLabel"     Content="{Binding GameMemory.Player.FAS}"        ContentStringFormat="  F.A.S: {0}" />
+                        <Label Name="MapLabel"     Content="{Binding GameMemory.Player.Map}"        ContentStringFormat="    Map: {0}" />
+                        <Label Name="SteveLabel"   Content="{Binding GameMemory.Player.Steve}"      ContentStringFormat="  Steve: {0}" />
+                        <Label Name="RodrigoLabel" Content="{Binding GameMemory.Player.Rodrigo}"    ContentStringFormat="Rodrigo: {0}" />
+                        <Label Name="ScoreLabel"   Content="{Binding GameMemory.Player.Score}"      ContentStringFormat="  Score: {0}" />
+                        <Label Name="RankLabel"    Content="{Binding GameMemory.Player.Rank}"       ContentStringFormat="   Rank: {0}" />
+                    </StackPanel>
+
+                    <StackPanel Name="EnemyPanel"
+                            MaxWidth="216"
+                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
+                            Style="{StaticResource EnemyPanelStyle}"
+                            HorizontalAlignment="Left"
+                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <Label Name="EnemyLabel">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Content" Value="Enemy HP" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Options.ShowBosses}" Value="True">
+                                            <Setter Property="Content" Value="Boss HP" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <ListView Name="EnemyList"
                               ItemsSource="{Binding GameMemory.Enemy}"
                               Background="{x:Null}"
                               BorderThickness="0"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="BorderThickness" Value="0" />
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="ToolTip" Value="{Binding TypeName}" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsAlive}" Value="False">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsBoss}"  Value="True" />
-                                            <Condition Binding="{Binding IsAlive}" Value="True" />
-                                            <Condition Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True" />
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Visibility" Value="Visible" />
-                                    </MultiDataTrigger>
-                                    <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                        <Setter Property="ToolTip" Value="Slot:Damage:CurrentHP:MaximumHP:HasMaxHP:IsEmpty:IsAlive:Action:Status:Model:Type" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsEmpty}" Value="True">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ListViewItem Padding="0" BorderThickness="0" HorizontalContentAlignment="Stretch">
-                                    <Grid Height="29">
-                                        <ProgressBar Value="{Binding Percentage, Mode=OneWay}" Minimum="0" Maximum="1" Background="#FF3C3C3C" Foreground="#FF640000" BorderThickness="0" />
-                                        <TextBlock VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                            <TextBlock.Style>
-                                                <Style TargetType="{x:Type TextBlock}">
-                                                    <Setter Property="FontSize" Value="14" />
-                                                    <Setter Property="Foreground" Value="Red" />
-                                                    <Setter Property="Padding" Value="5,0,0,0" />
-                                                    <Setter Property="Text" Value="{Binding HealthMessage, Mode=OneWay}" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
-                                                            <Setter Property="Text" Value="{Binding DebugMessage, Mode=OneWay}" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </Grid>
-                                </ListViewItem>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </StackPanel>
-
-            <ItemsControl Name="InventoryPanel"
-                          Grid.Column="1"
-                          ItemsSource="{Binding Inventory.Items}"
-                          Margin="56,0,0,0">
-                <ItemsControl.Style>
-                    <Style TargetType="{x:Type ItemsControl}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Options.ShowInventory}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Options.ShowEquipment}" Value="true">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ItemsControl.Style>
-
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="112" />
-                                <RowDefinition Height="112" />
-                                <RowDefinition Height="112" />
-                                <RowDefinition Height="112" />
-                                <RowDefinition Height="112" />
-                                <RowDefinition Height="112" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="112" />
-                                <ColumnDefinition Width="112" />
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemContainerStyle>
-                    <Style>
-                        <Setter Property="Grid.Row" Value="{Binding Entry.SlotRow}" />
-                        <Setter Property="Grid.Column" Value="{Binding Entry.SlotColumn}" />
-                        <Setter Property="Grid.ColumnSpan" Value="{Binding Entry.SlotSize}" />
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ToolTip="{Binding Entry.Name}">
-                            <Grid.Style>
-                                <Style TargetType="{x:Type Grid}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="ToolTip" Value="{Binding TypeName}" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Entry.SlotRow}" Value="6">
-                                            <Setter Property="Visibility" Value="Hidden" />
+                                        <DataTrigger Binding="{Binding IsAlive}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Entry.IsEmpty}" Value="true">
-                                            <Setter Property="Visibility" Value="Hidden" />
+                                        <DataTrigger Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsBoss}"  Value="True" />
+                                                <Condition Binding="{Binding IsAlive}" Value="True" />
+                                                <Condition Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                        <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Setter Property="ToolTip" Value="Slot:Damage:CurrentHP:MaximumHP:HasMaxHP:IsEmpty:IsAlive:Action:Status:Model:Type" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </Grid.Style>
-                            <Rectangle>
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Clipping}" />
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <Label VerticalAlignment="Bottom">
-                                <Label.Style>
-                                    <Style TargetType="{x:Type Label}">
-                                        <Setter Property="FontSize" Value="18" />
-                                        <Setter Property="Foreground" Value="White" />
-                                        <Setter Property="Content" Value="{Binding Entry.Quantity}" />
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ListViewItem Padding="0" BorderThickness="0" HorizontalContentAlignment="Stretch">
+                                        <Grid Height="29">
+                                            <ProgressBar Value="{Binding Percentage, Mode=OneWay}" Minimum="0" Maximum="1" Background="#FF3C3C3C" Foreground="#FF640000" BorderThickness="0" />
+                                            <TextBlock VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="Foreground" Value="Red" />
+                                                        <Setter Property="Padding" Value="5,0,0,0" />
+                                                        <Setter Property="Text" Value="{Binding HealthMessage, Mode=OneWay}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
+                                                                <Setter Property="Text" Value="{Binding DebugMessage, Mode=OneWay}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Grid>
+                                    </ListViewItem>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding Options.InventoryScale}"
+                                    ScaleY="{Binding Options.InventoryScale}"/>
+                </Grid.LayoutTransform>
+                
+                <ItemsControl Name="InventoryPanel"
+                          ItemsSource="{Binding Inventory.Items}"
+                          Margin="56,0,0,0">
+                    <ItemsControl.Style>
+                        <Style TargetType="{x:Type ItemsControl}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Options.ShowInventory}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Options.ShowEquipment}" Value="true">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ItemsControl.Style>
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="112" />
+                                    <RowDefinition Height="112" />
+                                    <RowDefinition Height="112" />
+                                    <RowDefinition Height="112" />
+                                    <RowDefinition Height="112" />
+                                    <RowDefinition Height="112" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="112" />
+                                    <ColumnDefinition Width="112" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Grid.Row" Value="{Binding Entry.SlotRow}" />
+                            <Setter Property="Grid.Column" Value="{Binding Entry.SlotColumn}" />
+                            <Setter Property="Grid.ColumnSpan" Value="{Binding Entry.SlotSize}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ToolTip="{Binding Entry.Name}">
+                                <Grid.Style>
+                                    <Style TargetType="{x:Type Grid}">
                                         <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Entry.SlotRow}" Value="6">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
                                             <DataTrigger Binding="{Binding Entry.IsEmpty}" Value="true">
                                                 <Setter Property="Visibility" Value="Hidden" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Entry.HasQuantity}" Value="false">
-                                                <Setter Property="Visibility" Value="Hidden" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Entry.IsAcid}" Value="true">
-                                                <Setter Property="Foreground" Value="Yellow" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Entry.IsBOW}" Value="true">
-                                                <Setter Property="Foreground" Value="LawnGreen" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Entry.IsFlame}" Value="true">
-                                                <Setter Property="Foreground" Value="Red" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Entry.IsInfinite}" Value="true">
-                                                <Setter Property="Content" Value="∞" />
-                                            </DataTrigger>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Entry.IsInfinite}" Value="false" />
-                                                    <Condition Binding="{Binding Entry.Quantity}" Value="0" />
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Foreground" Value="DarkRed" />
-                                            </MultiDataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Label.Style>
-                            </Label>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                </Grid.Style>
+                                <Rectangle>
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Clipping}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Label VerticalAlignment="Bottom">
+                                    <Label.Style>
+                                        <Style TargetType="{x:Type Label}">
+                                            <Setter Property="FontSize" Value="18" />
+                                            <Setter Property="Foreground" Value="White" />
+                                            <Setter Property="Content" Value="{Binding Entry.Quantity}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Entry.IsEmpty}" Value="true">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Entry.HasQuantity}" Value="false">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Entry.IsAcid}" Value="true">
+                                                    <Setter Property="Foreground" Value="Yellow" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Entry.IsBOW}" Value="true">
+                                                    <Setter Property="Foreground" Value="LawnGreen" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Entry.IsFlame}" Value="true">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Entry.IsInfinite}" Value="true">
+                                                    <Setter Property="Content" Value="∞" />
+                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Entry.IsInfinite}" Value="false" />
+                                                        <Condition Binding="{Binding Entry.Quantity}" Value="0" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Foreground" Value="DarkRed" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-            <Grid Name="EquipmentPanel" Grid.Column="1">
-                <Grid.Style>
-                    <Style TargetType="{x:Type Grid}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Options.ShowInventory}" Value="false">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
+                <Grid Name="EquipmentPanel">
+                    <Grid.Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Options.ShowInventory}" Value="false">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="112" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="168" />
-                </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="112" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="168" />
+                    </Grid.ColumnDefinitions>
 
-                <Rectangle Name="EquipmentRectangle"
+                    <Rectangle Name="EquipmentRectangle"
                            HorizontalAlignment="Center"
                            Width="{Binding Equipment.ClipWidth}"
                            ToolTip="{Binding Equipment.Entry.Name}">
-                    <Rectangle.Style>
-                        <Style TargetType="{x:Type Rectangle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Rectangle.Style>
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Label Name="EquipmentLabel"
+                        <Rectangle.Style>
+                            <Style TargetType="{x:Type Rectangle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Rectangle.Style>
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Name="EquipmentLabel"
                        VerticalAlignment="Bottom">
-                    <Label.Style>
-                        <Style TargetType="{x:Type Label}">
-                            <Setter Property="FontSize" Value="18" />
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter Property="Content" Value="{Binding Equipment.Entry.Quantity}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Equipment.Entry.HasQuantity}" Value="false">
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Equipment.Entry.IsAcid}" Value="true">
-                                    <Setter Property="Foreground" Value="Yellow" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Equipment.Entry.IsBOW}" Value="true">
-                                    <Setter Property="Foreground" Value="LawnGreen" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Equipment.Entry.IsFlame}" Value="true">
-                                    <Setter Property="Foreground" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Equipment.Entry.IsInfinite}" Value="true">
-                                    <Setter Property="Content" Value="∞" />
-                                </DataTrigger>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Equipment.Entry.IsInfinite}" Value="false" />
-                                        <Condition Binding="{Binding Equipment.Entry.Quantity}" Value="0" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Foreground" Value="DarkRed" />
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Label.Style>
-                </Label>
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="FontSize" Value="18" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Content" Value="{Binding Equipment.Entry.Quantity}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.HasQuantity}" Value="false">
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.IsAcid}" Value="true">
+                                        <Setter Property="Foreground" Value="Yellow" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.IsBOW}" Value="true">
+                                        <Setter Property="Foreground" Value="LawnGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.IsFlame}" Value="true">
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Equipment.Entry.IsInfinite}" Value="true">
+                                        <Setter Property="Content" Value="∞" />
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Equipment.Entry.IsInfinite}" Value="false" />
+                                            <Condition Binding="{Binding Equipment.Entry.Quantity}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Foreground" Value="DarkRed" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                </Grid>
             </Grid>
         </Grid>
     </StackPanel>

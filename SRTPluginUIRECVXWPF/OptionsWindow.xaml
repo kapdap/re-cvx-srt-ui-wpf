@@ -24,7 +24,7 @@
     <StackPanel>
         <uc:TitlebarControl ShowMaximizeButton="False" />
         <StackPanel>
-            <StackPanel Margin="15,10,15,0" Orientation="Horizontal">
+            <StackPanel Margin="15,10,15,15" Orientation="Horizontal">
                 <StackPanel Width="155">
                     <GroupBox Header="Game" Padding="5">
                         <StackPanel>
@@ -36,73 +36,11 @@
                             <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,0"  ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
                         </StackPanel>
                     </GroupBox>
+                    <Grid Margin="0,18,0,0" HorizontalAlignment="Left" Width="80">
+                        <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" />
+                    </Grid>
                 </StackPanel>
                 <StackPanel Width="155" Margin="10,0,10,0">
-                    <GroupBox Header="Sizing" Padding="5" IsEnabled="false">
-                        <StackPanel>
-                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,10">
-                                <Label Grid.Column="0" Content="Text" Width="52" Padding="0,0,0,0" />
-                                <ComboBox Grid.Column="1"
-                                          SelectedValuePath="Content"
-                                          SelectedValue="{Binding Options.TextSize}"
-                                          Padding="6,0,5,1"
-                                          DockPanel.Dock="Right"
-                                          ToolTip="Adjust scale of text in the main window.">
-                                    <ComboBoxItem Content="Normal" />
-                                    <ComboBoxItem Content="Small" />
-                                    <ComboBoxItem Content="Smaller" />
-                                    <ComboBoxItem Content="Smallest" />
-                                </ComboBox>
-                            </DockPanel>
-                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,10">
-                                <Label Grid.Column="0" Content="Icons" Width="52" Padding="0,0,0,0" />
-                                <ComboBox Grid.Column="1"
-                                          SelectedValuePath="Content"
-                                          SelectedValue="{Binding Options.IconSize}"
-                                          Padding="6,0,5,1"
-                                          DockPanel.Dock="Right"
-                                          ToolTip="Adjust scale of the inventory icons.">
-                                    <ComboBoxItem Content="Normal" />
-                                    <ComboBoxItem Content="Small" />
-                                    <ComboBoxItem Content="Smaller" />
-                                    <ComboBoxItem Content="Smallest" />
-                                </ComboBox>
-                            </DockPanel>
-                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
-                                <Label Grid.Column="0" Content="Health" Width="52" Padding="0,0,0,0" />
-                                <ComboBox Grid.Column="1"
-                                          SelectedValuePath="Content"
-                                          SelectedValue="{Binding Options.HealthSize}"
-                                          Padding="6,0,5,1"
-                                          DockPanel.Dock="Right"
-                                          ToolTip="Adjust scale of health status image.">
-                                    <ComboBoxItem Content="Normal" />
-                                    <ComboBoxItem Content="Small" />
-                                    <ComboBoxItem Content="Smaller" />
-                                    <ComboBoxItem Content="Smallest" />
-                                </ComboBox>
-                            </DockPanel>
-                        </StackPanel>
-                    </GroupBox>
-                    <GroupBox Header="Opacity" Padding="5">
-                        <DockPanel VerticalAlignment="Center">
-                            <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
-                                     ToolTip="Move slider to adjust the opacity level of text and icons."
-                                     DockPanel.Dock="Right"
-                                     TextAlignment="Right"
-                                     Width="35" />
-                            <Slider Name="OpacitySlider"
-                                    Value="{Binding Options.Opacity}"
-                                    ToolTip="Move slider to adjust the opacity level of text and icons."
-                                    Minimum="0.05"
-                                    Maximum="1"
-                                    TickFrequency="0.1"
-                                    TickPlacement="BottomRight"
-                                    Margin="0,0,5,0" />
-                        </DockPanel>
-                    </GroupBox>
-                </StackPanel>
-                <StackPanel Width="155">
                     <GroupBox Header="Window" Padding="5">
                         <StackPanel>
                             <CheckBox Content="Always on Top" IsChecked="{Binding Options.AlwaysOnTop}"  Margin="0,0,0,10" ToolTip="Keeps the main window on top of all other windows." />
@@ -117,10 +55,80 @@
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
+                <StackPanel Width="155">
+                    <GroupBox Header="Scaling" Padding="5">
+                        <StackPanel>
+                            <Label Grid.Column="0" Content="Status" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                                <TextBox Text="{Binding ElementName=StatusSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                         ToolTip="Move slider to scale of the status image."
+                                         DockPanel.Dock="Right"
+                                         TextAlignment="Right"
+                                         Width="35" />
+                                <Slider Name="StatusSlider"
+                                        Value="{Binding Options.StatusScale}"
+                                        ToolTip="Move slider to scale of the status image."
+                                        Minimum="0.5"
+                                        Maximum="1"
+                                        TickFrequency="0.1"
+                                        TickPlacement="BottomRight"
+                                        Margin="0,0,5,0" />
+                            </DockPanel>
+                            <Label Grid.Column="0" Content="Statistics" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                                <TextBox Text="{Binding ElementName=TextSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                         ToolTip="Move slider to scale of the statistics panel."
+                                         DockPanel.Dock="Right"
+                                         TextAlignment="Right"
+                                         Width="35" />
+                                <Slider Name="TextSlider"
+                                        Value="{Binding Options.TextScale}"
+                                        ToolTip="Move slider to scale of the statistics panel."
+                                        Minimum="0.5"
+                                        Maximum="1"
+                                        TickFrequency="0.1"
+                                        TickPlacement="BottomRight"
+                                        Margin="0,0,5,0" />
+                            </DockPanel>
+                            <Label Grid.Column="0" Content="Inventory" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                            <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                                <TextBox Text="{Binding ElementName=InventorySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                         ToolTip="Move slider to scale of the inventory panel."
+                                         DockPanel.Dock="Right"
+                                         TextAlignment="Right"
+                                         Width="35" />
+                                <Slider Name="InventorySlider"
+                                        Value="{Binding Options.InventoryScale}"
+                                        ToolTip="Move slider to scale of the inventory panel."
+                                        Minimum="0.5"
+                                        Maximum="1"
+                                        TickFrequency="0.1"
+                                        TickPlacement="BottomRight"
+                                        Margin="0,0,5,0" />
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Opacity" Padding="5">
+                        <StackPanel>
+                            <DockPanel VerticalAlignment="Center">
+                                <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                         ToolTip="Move slider to adjust the opacity level of text and icons."
+                                         DockPanel.Dock="Right"
+                                         TextAlignment="Right"
+                                         Width="35" />
+                                <Slider Name="OpacitySlider"
+                                        Value="{Binding Options.Opacity}"
+                                        ToolTip="Move slider to adjust the opacity level of text and icons."
+                                        Minimum="0.05"
+                                        Maximum="1"
+                                        TickFrequency="0.1"
+                                        TickPlacement="BottomRight"
+                                        Margin="0,0,5,0" />
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
             </StackPanel>
-            <Grid Margin="15" HorizontalAlignment="Left" Width="80">
-                <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" />
-            </Grid>
         </StackPanel>
     </StackPanel>
 </Window>

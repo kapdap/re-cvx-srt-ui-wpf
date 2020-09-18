@@ -101,75 +101,106 @@ namespace SRTPluginUIRECVXWPF.Models
             {
                 if (_opacity == null)
                     _opacity = RegistryHelper.GetDoubleValue(_readKey, "Opacity", 1.0d);
-                return Math.Max((double)_opacity, 0.05);
+
+                _opacity = Math.Max((double)_opacity, 0.05);
+                _opacity = Math.Min((double)_opacity, 1.00);
+                _opacity = Math.Round((double)_opacity, 2);
+
+                return (double)_opacity;
             }
             set
             {
                 if (_opacity != value)
                 {
                     _opacity = Math.Max(value, 0.05);
+                    _opacity = Math.Min((double)_opacity, 1.00);
                     _opacity = Math.Round((double)_opacity, 2);
+
                     _writeKey.SetValue("Opacity", _opacity, RegistryValueKind.String);
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _textSize;
-        public string TextSize
+        private double? _textScale;
+        public double TextScale
         {
             get
             {
-                if (String.IsNullOrEmpty(_textSize))
-                    _textSize = RegistryHelper.GetValue(_readKey, "TextSize", "Normal");
-                return _textSize;
+                if (_textScale == null)
+                    _textScale = RegistryHelper.GetDoubleValue(_readKey, "TextScale", 1.0d);
+
+                _textScale = Math.Max((double)_textScale, 0.50);
+                _textScale = Math.Min((double)_textScale, 1.00);
+                _textScale = Math.Round((double)_textScale, 2);
+
+                return (double)_textScale;
             }
             set
             {
-                if (_textSize != value)
+                if (_textScale != value)
                 {
-                    _textSize = value;
-                    _writeKey.SetValue("TextSize", value, RegistryValueKind.String);
+                    _textScale = Math.Max(value, 0.50);
+                    _textScale = Math.Min((double)_textScale, 1.00);
+                    _textScale = Math.Round((double)_textScale, 2);
+
+                    _writeKey.SetValue("TextScale", _textScale, RegistryValueKind.String);
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _iconSize;
-        public string IconSize
+        private double? _inventoryScale;
+        public double InventoryScale
         {
             get
             {
-                if (String.IsNullOrEmpty(_iconSize))
-                    _iconSize = RegistryHelper.GetValue(_readKey, "IconSize", "Normal");
-                return _iconSize;
+                if (_inventoryScale == null)
+                    _inventoryScale = RegistryHelper.GetDoubleValue(_readKey, "InventoryScale", 1.0d);
+
+                _inventoryScale = Math.Max((double)_inventoryScale, 0.50);
+                _inventoryScale = Math.Min((double)_inventoryScale, 1.00);
+                _inventoryScale = Math.Round((double)_inventoryScale, 2);
+
+                return (double)_inventoryScale;
             }
             set
             {
-                if (_iconSize != value)
+                if (_inventoryScale != value)
                 {
-                    _iconSize = value;
-                    _writeKey.SetValue("IconSize", value, RegistryValueKind.String);
+                    _inventoryScale = Math.Max(value, 0.50);
+                    _inventoryScale = Math.Min((double)_inventoryScale, 1.00);
+                    _inventoryScale = Math.Round((double)_inventoryScale, 2);
+
+                    _writeKey.SetValue("InventoryScale", _inventoryScale, RegistryValueKind.String);
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _healthSize;
-        public string HealthSize
+        private double? _statusScale;
+        public double StatusScale
         {
             get
             {
-                if (String.IsNullOrEmpty(_healthSize))
-                    _healthSize = RegistryHelper.GetValue(_readKey, "HealthSize", "Normal");
-                return _healthSize;
+                if (_statusScale == null)
+                    _statusScale = RegistryHelper.GetDoubleValue(_readKey, "StatusScale", 1.0d);
+
+                _statusScale = Math.Max((double)_statusScale, 0.50);
+                _statusScale = Math.Min((double)_statusScale, 1.00);
+                _statusScale = Math.Round((double)_statusScale, 2);
+
+                return (double)_statusScale;
             }
             set
             {
-                if (_healthSize != value)
+                if (_statusScale != value)
                 {
-                    _healthSize = value;
-                    _writeKey.SetValue("HealthSize", value, RegistryValueKind.String);
+                    _statusScale = Math.Max(value, 0.50);
+                    _statusScale = Math.Min((double)_statusScale, 1.00);
+                    _statusScale = Math.Round((double)_statusScale, 2);
+
+                    _writeKey.SetValue("StatusScale", _statusScale, RegistryValueKind.String);
                     OnPropertyChanged();
                 }
             }
