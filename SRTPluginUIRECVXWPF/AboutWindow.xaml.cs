@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SRTPluginUIRECVXWPF.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,7 @@ namespace SRTPluginUIRECVXWPF
         public AboutWindow()
         {
             InitializeComponent();
+            DataContext = Plugin.Models.AppView;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -29,5 +31,23 @@ namespace SRTPluginUIRECVXWPF
             Visibility = Visibility.Hidden;
             e.Cancel = true;
         }
+
+        private void UserInterfaceLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://github.com/kapdap/re-cvx-srt-ui-wpf");
+
+        private void MemoryProviderLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://github.com/kapdap/re-cvx-srt-provider");
+
+        private void PluginHostLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://www.neonblu.com/SRT/");
+
+        private void WebsiteLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://kapdap.github.io/re-cvx-srt/");
+
+        private void GitHubLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://github.com/kapdap/re-cvx-srt-ui-wpf");
+
+        private void LicenseLink_MouseUp(object sender, MouseButtonEventArgs e) =>
+            URLHelper.OpenURL("https://github.com/kapdap/re-cvx-srt-ui-wpf/blob/master/LICENSE");
     }
 }

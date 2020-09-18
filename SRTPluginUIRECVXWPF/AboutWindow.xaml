@@ -18,6 +18,20 @@
         <WindowChrome CaptionHeight="30" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
     </WindowChrome.WindowChrome>
     <StackPanel>
+        <StackPanel.Resources>
+            <Style x:Key="UnderlineLabel" TargetType="{x:Type Label}">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Foreground" Value="#0366d6" />
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextDecorations="Underline"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </StackPanel.Resources>
+
         <uc:TitlebarControl ShowMinimizeButton="False" ShowMaximizeButton="False" />
         <Grid Margin="15,10,15,15">
             <StackPanel>
@@ -28,6 +42,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto"  />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -35,27 +50,25 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" Content="Plugin Host:" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="1" Grid.Row="0" Content="SRT Host" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="2" Grid.Row="0" Content="v2.2.0" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="3" Grid.Row="0" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0"></Label>
+                        <Label Grid.Column="0" Grid.Row="0" Content="User Interface:" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
+                        <Label Grid.Column="1" Grid.Row="0" Content="SRTPluginUIRECVXWPF" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
+                        <Label Grid.Column="2" Grid.Row="0" Content="{Binding PluginVersion}" Padding="0,0,0,0" Margin="0,0,10,0" FontWeight="Bold" />
+                        <Label Grid.Column="3" Grid.Row="0" Content="Website" Padding="0,0,0,0" FontWeight="Bold" Style="{StaticResource UnderlineLabel}" Name="UserInterfaceLink" MouseUp="UserInterfaceLink_MouseUp" />
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="User Interface:" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="1" Grid.Row="1" Content="SRTPluginUIRECVXWPF" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="2" Grid.Row="1" Content="v0.9.0.0" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="3" Grid.Row="1" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0"></Label>
+                        <Label Grid.Column="0" Grid.Row="1" Content="Memory Provider:" Padding="0,0,0,0" Margin="0,0,10,0" />
+                        <Label Grid.Column="1" Grid.Row="1" Content="SRTPluginProviderRECVXSRT" Padding="0,0,0,0" Margin="0,0,10,0" />
+                        <Label Grid.Column="3" Grid.Row="1" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="MemoryProviderLink" MouseUp="MemoryProviderLink_MouseUp" />
 
-                        <Label Grid.Column="0" Grid.Row="2" Content="Memory Provider:" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="1" Grid.Row="2" Content="SRTPluginProviderRECVXSRT" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="2" Grid.Row="2" Content="v0.9.0.0" Padding="0,0,0,0" Margin="0,0,10,0"></Label>
-                        <Label Grid.Column="3" Grid.Row="2" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0"></Label>
+                        <Label Grid.Column="0" Grid.Row="2" Content="Plugin Host:" Padding="0,0,0,0" Margin="0,0,10,0" />
+                        <Label Grid.Column="1" Grid.Row="2" Content="SRTHost" Padding="0,0,0,0" Margin="0,0,10,0" />
+                        <Label Grid.Column="3" Grid.Row="2" Content="Website" Padding="0,0,0,0" Margin="0,0,0,0" Style="{StaticResource UnderlineLabel}" Name="PluginHostLink" MouseUp="PluginHostLink_MouseUp" />
                     </Grid>
                     <Label Content="RE CVX SRT is a speedrun tool for Resident Evil/Biohazard: Code: Veronica." Padding="0,0,0,0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label Content="Website" Padding="0,0,0,0" Margin="10,0,10,0" />
-                    <Label Content="GitHub" Padding="0,0,0,0" Margin="10,0,10,0" />
-                    <Label Content="License" Padding="0,0,0,0" Margin="10,0,10,0" />
+                    <Label Content="Website" Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="WebsiteLink" MouseUp="WebsiteLink_MouseUp" />
+                    <Label Content="GitHub"  Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="GitHubLink" MouseUp="GitHubLink_MouseUp" />
+                    <Label Content="License" Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="LicenseLink" MouseUp="LicenseLink_MouseUp" />
                 </StackPanel>
             </StackPanel>
         </Grid>
