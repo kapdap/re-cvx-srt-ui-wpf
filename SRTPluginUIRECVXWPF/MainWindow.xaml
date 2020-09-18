@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SRTPluginUIRECVXWPF"
         mc:Ignorable="d"
         Title="{Binding PluginTitle}"
-        Width="496" Height="702"
+        Width="458" Height="606"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         AllowsTransparency="True"
@@ -329,10 +329,10 @@
                     <ScaleTransform ScaleX="{Binding Options.InventoryScale}"
                                     ScaleY="{Binding Options.InventoryScale}"/>
                 </Grid.LayoutTransform>
-                
+
                 <ItemsControl Name="InventoryPanel"
                           ItemsSource="{Binding Inventory.Items}"
-                          Margin="56,0,0,0">
+                          Margin="48,0,0,0">
                     <ItemsControl.Style>
                         <Style TargetType="{x:Type ItemsControl}">
                             <Style.Triggers>
@@ -350,16 +350,16 @@
                         <ItemsPanelTemplate>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="112" />
-                                    <RowDefinition Height="112" />
-                                    <RowDefinition Height="112" />
-                                    <RowDefinition Height="112" />
-                                    <RowDefinition Height="112" />
-                                    <RowDefinition Height="112" />
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="96" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="112" />
-                                    <ColumnDefinition Width="112" />
+                                    <ColumnDefinition Width="96" />
+                                    <ColumnDefinition Width="96" />
                                 </Grid.ColumnDefinitions>
                             </Grid>
                         </ItemsPanelTemplate>
@@ -446,10 +446,10 @@
                     </Grid.Style>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="112" />
+                        <RowDefinition Height="96" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="168" />
+                        <ColumnDefinition Width="144" />
                     </Grid.ColumnDefinitions>
 
                     <Rectangle Name="EquipmentRectangle"

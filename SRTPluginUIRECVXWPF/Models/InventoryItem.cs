@@ -7,8 +7,8 @@ namespace SRTPluginUIRECVXWPF.Models
 {
     public class InventoryItem : BaseNotifyModel
     {
-        public const int ImageWidth = 112;
-        public const int ImageHeight = 112;
+        public const int ImageWidth = 96;
+        public const int ImageHeight = 96;
 
         private InventoryEntry _entry;
         public InventoryEntry Entry
