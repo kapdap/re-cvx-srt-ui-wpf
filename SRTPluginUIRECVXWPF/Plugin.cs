@@ -98,21 +98,35 @@ namespace SRTPluginUIRECVXWPF
 
             private static OptionsWindow _options;
             public static OptionsWindow Options
-            { 
+            {
                 get
                 {
                     if (_options == null)
                         _options = new OptionsWindow();
                     return _options;
-                } 
-                set => _options = value; 
+                }
+                set => _options = value;
+            }
+
+            private static AboutWindow _about;
+            public static AboutWindow About
+            {
+                get
+                {
+                    if (_about == null)
+                        _about = new AboutWindow();
+                    return _about;
+                }
+                set => _about = value;
             }
 
             public static void CloseAll()
             {
+                CloseWindow(_about);
                 CloseWindow(_options);
                 CloseWindow(_main);
 
+                _about = null;
                 _options = null;
                 _main = null;
             }

@@ -12,12 +12,8 @@
         UseLayoutRounding="True"
         WindowStyle="None"
         Background="#f0f0f0"
+        WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
-    <Window.Style>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="FontSize" Value="14" />
-        </Style>
-    </Window.Style>
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="30" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
     </WindowChrome.WindowChrome>

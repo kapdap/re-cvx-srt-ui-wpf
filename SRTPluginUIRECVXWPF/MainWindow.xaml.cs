@@ -17,10 +17,8 @@ namespace SRTPluginUIRECVXWPF
         private void OptionsMenuItem_Click(object sender, RoutedEventArgs e) => 
             Plugin.Windows.Options.Show();
 
-        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e) =>
+            Plugin.Windows.About.Show();
 
         private void MinimizeMenuItem_Click(object sender, RoutedEventArgs e) =>
             WindowState = WindowState.Minimized;
