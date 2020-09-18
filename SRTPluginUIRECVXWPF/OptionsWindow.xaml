@@ -61,13 +61,13 @@
                             <Label Grid.Column="0" Content="Status" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
                             <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
                                 <TextBox Text="{Binding ElementName=StatusSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
-                                         ToolTip="Move slider to scale of the status image."
+                                         ToolTip="Move slider to adjust scale of the status image."
                                          DockPanel.Dock="Right"
                                          TextAlignment="Right"
                                          Width="35" />
                                 <Slider Name="StatusSlider"
                                         Value="{Binding Options.StatusScale}"
-                                        ToolTip="Move slider to scale of the status image."
+                                        ToolTip="Move slider to adjust scale of the status image."
                                         Minimum="0.5"
                                         Maximum="1"
                                         TickFrequency="0.1"
@@ -77,13 +77,13 @@
                             <Label Grid.Column="0" Content="Statistics" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
                             <DockPanel VerticalAlignment="Center" Margin="0,0,0,5">
                                 <TextBox Text="{Binding ElementName=TextSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
-                                         ToolTip="Move slider to scale of the statistics panel."
+                                         ToolTip="Move slider to adjust scale of the statistics panel."
                                          DockPanel.Dock="Right"
                                          TextAlignment="Right"
                                          Width="35" />
                                 <Slider Name="TextSlider"
                                         Value="{Binding Options.TextScale}"
-                                        ToolTip="Move slider to scale of the statistics panel."
+                                        ToolTip="Move slider to adjust scale of the statistics panel."
                                         Minimum="0.5"
                                         Maximum="1"
                                         TickFrequency="0.1"
@@ -93,13 +93,13 @@
                             <Label Grid.Column="0" Content="Inventory" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
                             <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
                                 <TextBox Text="{Binding ElementName=InventorySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
-                                         ToolTip="Move slider to scale of the inventory panel."
+                                         ToolTip="Move slider to adjust scale of the inventory panel."
                                          DockPanel.Dock="Right"
                                          TextAlignment="Right"
                                          Width="35" />
                                 <Slider Name="InventorySlider"
                                         Value="{Binding Options.InventoryScale}"
-                                        ToolTip="Move slider to scale of the inventory panel."
+                                        ToolTip="Move slider to adjust scale of the inventory panel."
                                         Minimum="0.5"
                                         Maximum="1"
                                         TickFrequency="0.1"
@@ -112,13 +112,13 @@
                         <StackPanel>
                             <DockPanel VerticalAlignment="Center">
                                 <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
-                                         ToolTip="Move slider to adjust the opacity level of text and icons."
+                                         ToolTip="Move slider to adjust the opacity level of the interface."
                                          DockPanel.Dock="Right"
                                          TextAlignment="Right"
                                          Width="35" />
                                 <Slider Name="OpacitySlider"
                                         Value="{Binding Options.Opacity}"
-                                        ToolTip="Move slider to adjust the opacity level of text and icons."
+                                        ToolTip="Move slider to adjust the opacity level of the interface."
                                         Minimum="0.05"
                                         Maximum="1"
                                         TickFrequency="0.1"
