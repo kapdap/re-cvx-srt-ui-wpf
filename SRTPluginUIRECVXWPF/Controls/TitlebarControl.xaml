@@ -26,8 +26,8 @@
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
             <Style TargetType="{x:Type Path}">
-                <Setter Property="Height" Value="29" />
                 <Setter Property="Width" Value="45" />
+                <Setter Property="Height" Value="29" />
             </Style>
             <Style x:Key="TitlebarButtonBaseStyle" TargetType="{x:Type Button}">
                 <Setter Property="Width" Value="45" />
@@ -43,6 +43,14 @@
                 </Style.Triggers>
             </Style>
             <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonBaseStyle}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True">
+                        <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsPressed}" Value="True">
+                        <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -53,18 +61,16 @@
                                 <ContentPresenter Name="TitlebarButtonContentPresenter"
 						                          Margin="0"
 						                          Focusable="False"
-						                          HorizontalAlignment="Center"
 						                          VerticalAlignment="Center"
+						                          HorizontalAlignment="Center"
 						                          RecognizesAccessKey="True" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
                                     <Setter TargetName="TitlebarButtonBorder" Property="Background" Value="#E5E5E5" />
-                                    <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="true">
                                     <Setter TargetName="TitlebarButtonBorder" Property="Background" Value="#CACACB" />
-                                    <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -86,38 +92,42 @@
                 </Style.Triggers>
             </Style>
             <Style x:Key="TitlebarCloseButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonBaseStyle}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ShowCloseButton}" Value="False">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True">
+                        <Setter Property="Foreground" Value="#FFFFFF" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsPressed}" Value="True">
+                        <Setter Property="Foreground" Value="#FFFFFF" />
+                    </DataTrigger>
+                </Style.Triggers>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Name="TitlebarButtonBorder"
+                            <Border Name="TitlebarCloseButtonBorder"
 					                Background="Transparent"
 					                BorderThickness="0"
 					                SnapsToDevicePixels="true">
-                                <ContentPresenter Name="TitlebarButtonContentPresenter"
+                                <ContentPresenter Name="TitlebarCloseButtonContentPresenter"
 						                          Margin="0"
 						                          Focusable="False"
-						                          HorizontalAlignment="Center"
 						                          VerticalAlignment="Center"
+						                          HorizontalAlignment="Center"
 						                          RecognizesAccessKey="True" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter TargetName="TitlebarButtonBorder" Property="Background" Value="#E81123" />
-                                    <Setter Property="Foreground" Value="#FFFFFF" />
+                                    <Setter TargetName="TitlebarCloseButtonBorder" Property="Background" Value="#E81123" />
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="true">
-                                    <Setter TargetName="TitlebarButtonBorder" Property="Background" Value="#F1707A" />
-                                    <Setter Property="Foreground" Value="#FFFFFF" />
+                                    <Setter TargetName="TitlebarCloseButtonBorder" Property="Background" Value="#F1707A" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding ShowCloseButton}" Value="False">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                    </DataTrigger>
-                </Style.Triggers>
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
