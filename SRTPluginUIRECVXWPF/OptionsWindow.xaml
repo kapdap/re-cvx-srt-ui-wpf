@@ -22,21 +22,6 @@
         <StackPanel>
             <StackPanel Margin="15,10,15,15" Orientation="Horizontal">
                 <StackPanel Width="155">
-                    <GroupBox Header="Game" Padding="5">
-                        <StackPanel>
-                            <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
-                            <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
-                            <CheckBox Content="Only Equipped"   IsChecked="{Binding Options.ShowEquipment}"  Margin="20,0,0,10" ToolTip="Only show the currently equipped item." IsEnabled="{Binding Options.ShowInventory}" />
-                            <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
-                            <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
-                            <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,0"  ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
-                        </StackPanel>
-                    </GroupBox>
-                    <Grid Margin="0,18,0,0" HorizontalAlignment="Left" Width="80">
-                        <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" />
-                    </Grid>
-                </StackPanel>
-                <StackPanel Width="155" Margin="10,0,10,0">
                     <GroupBox Header="Window" Padding="5">
                         <StackPanel>
                             <CheckBox Content="Always on Top" IsChecked="{Binding Options.AlwaysOnTop}"  Margin="0,0,0,10" ToolTip="Keeps the main window on top of all other windows." />
@@ -48,6 +33,21 @@
                         <StackPanel>
                             <CheckBox Content="Debug Panel" IsChecked="{Binding Options.Debug}" Margin="0,0,0,10" ToolTip="Show/hide the debug panel." />
                             <CheckBox Content="Debug Enemy" IsChecked="{Binding Options.DebugEnemy}" ToolTip="Enable/disable enemy debug mode." />
+                        </StackPanel>
+                    </GroupBox>
+                    <Grid Margin="0,23,0,0" HorizontalAlignment="Left" Width="80">
+                        <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Width="155" Margin="10,0,10,0">
+                    <GroupBox Header="Game" Padding="5">
+                        <StackPanel>
+                            <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
+                            <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
+                            <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
+                            <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,10"  ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
+                            <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
+                            <CheckBox Content="Only Equipped"   IsChecked="{Binding Options.ShowEquipment}"  Margin="20,0,0,0" ToolTip="Only show the currently equipped item." IsEnabled="{Binding Options.ShowInventory}" />
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
