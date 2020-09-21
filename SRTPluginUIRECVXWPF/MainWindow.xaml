@@ -234,11 +234,11 @@
                         <Label Name="SavesLabel"   Content="{Binding GameMemory.Player.Saves}"      ContentStringFormat="  Saves: {0}" />
                         <Label Name="RetryLabel"   Content="{Binding GameMemory.Player.Retry}"      ContentStringFormat="  Retry: {0}" />
                         <Label Name="FASLabel"     Content="{Binding GameMemory.Player.FAS}"        ContentStringFormat="  F.A.S: {0}" />
-                        <Label Name="MapLabel"     Content="{Binding GameMemory.Player.Map}"        ContentStringFormat="    Map: {0}" />
-                        <Label Name="SteveLabel"   Content="{Binding GameMemory.Player.Steve}"      ContentStringFormat="  Steve: {0}" />
-                        <Label Name="RodrigoLabel" Content="{Binding GameMemory.Player.Rodrigo}"    ContentStringFormat="Rodrigo: {0}" />
-                        <Label Name="ScoreLabel"   Content="{Binding GameMemory.Player.Score}"      ContentStringFormat="  Score: {0}" />
-                        <Label Name="RankLabel"    Content="{Binding GameMemory.Player.Rank}"       ContentStringFormat="   Rank: {0}" />
+                        <Label Name="MapLabel"     Content="{Binding GameMemory.Rank.Map}"          ContentStringFormat="    Map: {0}" />
+                        <Label Name="SteveLabel"   Content="{Binding GameMemory.Rank.Steve}"        ContentStringFormat="  Steve: {0}" />
+                        <Label Name="RodrigoLabel" Content="{Binding GameMemory.Rank.Rodrigo}"      ContentStringFormat="Rodrigo: {0}" />
+                        <Label Name="ScoreLabel"   Content="{Binding GameMemory.Rank.Score}"        ContentStringFormat="  Score: {0}" />
+                        <Label Name="RankLabel"    Content="{Binding GameMemory.Rank.Name}"         ContentStringFormat="   Rank: {0}" />
                     </StackPanel>
 
                     <StackPanel Name="EnemyPanel"
