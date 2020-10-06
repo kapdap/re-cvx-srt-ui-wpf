@@ -1,0 +1,149 @@
+﻿<Window x:Class="SRTPluginUIRECVXWPF.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:SRTPluginUIRECVXWPF.Controls"
+        xmlns:local="clr-namespace:SRTPluginUIRECVXWPF"
+        mc:Ignorable="d"
+        Title="Options"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        UseLayoutRounding="True"
+        WindowStyle="None"
+        Background="#f0f0f0"
+        WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+    <StackPanel>
+        <uc:TitlebarControl ShowMaximizeButton="False" />
+        <StackPanel Margin="15,10,15,15" Orientation="Horizontal">
+            <DockPanel Width="155">
+                <GroupBox DockPanel.Dock="Top" Header="Window" Padding="5">
+                    <StackPanel>
+                        <CheckBox Content="Always on Top"    IsChecked="{Binding Options.AlwaysOnTop}"    Margin="0,0,0,10" ToolTip="Keeps the main window on top of all other windows." />
+                        <CheckBox Content="Attach to Window" IsChecked="{Binding Options.AttachToWindow}" Margin="0,0,0,10" ToolTip="SRT window follows the game window when moved." />
+                        <CheckBox Content="Show Titlebar"    IsChecked="{Binding Options.ShowTitlebar}"   Margin="0,0,0,10" ToolTip="Show/hide the main window titlebar." />
+                        <CheckBox Content="Transparent"      IsChecked="{Binding Options.Transparent}"                      ToolTip="Set the main window background to transparent." />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox DockPanel.Dock="Top" Header="Developer" Padding="5">
+                    <StackPanel>
+                        <CheckBox Content="Debug Panel" IsChecked="{Binding Options.Debug}" Margin="0,0,0,10" ToolTip="Show/hide the debug panel." />
+                        <CheckBox Content="Debug Enemy" IsChecked="{Binding Options.DebugEnemy}" ToolTip="Enable/disable enemy debug mode." />
+                    </StackPanel>
+                </GroupBox>
+                <Button DockPanel.Dock="Top" Name="CloseButton" Content="Close" Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="CloseButton_Click" />
+            </DockPanel>
+            <StackPanel Width="155" Margin="10,0,10,0">
+                <GroupBox Header="Game" Padding="5">
+                    <StackPanel>
+                        <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
+                        <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
+                        <CheckBox Content="Show Ranking"    IsChecked="{Binding Options.ShowRanking}"    Margin="0,0,0,10"  ToolTip="Show/hide player ranking and score panel." />
+                        <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
+                        <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,10" ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
+                        <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
+                        <CheckBox Content="Only Equipped"   IsChecked="{Binding Options.ShowEquipment}"  Margin="20,0,0,0"  ToolTip="Only show the currently equipped item." IsEnabled="{Binding Options.ShowInventory}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Layout" Padding="5">
+                    <StackPanel>
+                        <CheckBox Content="Swap Inventory" IsChecked="{Binding Options.SwapInventory}" Margin="0,0,0,0" ToolTip="Move inventory panel to the right side." />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Width="155">
+                <GroupBox Header="Scaling" Padding="5">
+                    <StackPanel>
+                        <Label Grid.Column="0" Content="Status" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                        <DockPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                            <TextBox Text="{Binding ElementName=StatusSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                        ToolTip="Move slider to adjust scale of the status image."
+                                        DockPanel.Dock="Right"
+                                        TextAlignment="Right"
+                                        Width="35" />
+                            <Slider Name="StatusSlider"
+                                    Value="{Binding Options.StatusScale}"
+                                    ToolTip="Move slider to adjust scale of the status image."
+                                    Minimum="0.5"
+                                    Maximum="2"
+                                    TickFrequency="0.1"
+                                    TickPlacement="BottomRight"
+                                    Margin="0,0,5,0" />
+                        </DockPanel>
+                        <Label Grid.Column="0" Content="Statistics" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                        <DockPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                            <TextBox Text="{Binding ElementName=StatisticsSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                        ToolTip="Move slider to adjust scale of the statistics panel."
+                                        DockPanel.Dock="Right"
+                                        TextAlignment="Right"
+                                        Width="35" />
+                            <Slider Name="StatisticsSlider"
+                                    Value="{Binding Options.StatisticsScale}"
+                                    ToolTip="Move slider to adjust scale of the statistics panel."
+                                    Minimum="0.5"
+                                    Maximum="2"
+                                    TickFrequency="0.1"
+                                    TickPlacement="BottomRight"
+                                    Margin="0,0,5,0" />
+                        </DockPanel>
+                        <Label Grid.Column="0" Content="Enemy" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                        <DockPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                            <TextBox Text="{Binding ElementName=EnemySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                        ToolTip="Move slider to adjust scale of the enemy panel."
+                                        DockPanel.Dock="Right"
+                                        TextAlignment="Right"
+                                        Width="35" />
+                            <Slider Name="EnemySlider"
+                                    Value="{Binding Options.EnemyScale}"
+                                    ToolTip="Move slider to adjust scale of the enemy panel."
+                                    Minimum="0.5"
+                                    Maximum="2"
+                                    TickFrequency="0.1"
+                                    TickPlacement="BottomRight"
+                                    Margin="0,0,5,0" />
+                        </DockPanel>
+                        <Label Grid.Column="0" Content="Inventory" Padding="0,0,0,0" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+                        <DockPanel VerticalAlignment="Center" Margin="0,0,0,0">
+                            <TextBox Text="{Binding ElementName=InventorySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                        ToolTip="Move slider to adjust scale of the inventory panel."
+                                        DockPanel.Dock="Right"
+                                        TextAlignment="Right"
+                                        Width="35" />
+                            <Slider Name="InventorySlider"
+                                    Value="{Binding Options.InventoryScale}"
+                                    ToolTip="Move slider to adjust scale of the inventory panel."
+                                    Minimum="0.5"
+                                    Maximum="2"
+                                    TickFrequency="0.1"
+                                    TickPlacement="BottomRight"
+                                    Margin="0,0,5,0" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Opacity" Padding="5">
+                    <StackPanel>
+                        <DockPanel VerticalAlignment="Center">
+                            <TextBox Text="{Binding ElementName=OpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F2}}"
+                                        ToolTip="Move slider to adjust the opacity level of the interface."
+                                        DockPanel.Dock="Right"
+                                        TextAlignment="Right"
+                                        Width="35" />
+                            <Slider Name="OpacitySlider"
+                                    Value="{Binding Options.Opacity}"
+                                    ToolTip="Move slider to adjust the opacity level of the interface."
+                                    Minimum="0.05"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    TickPlacement="BottomRight"
+                                    Margin="0,0,5,0" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>

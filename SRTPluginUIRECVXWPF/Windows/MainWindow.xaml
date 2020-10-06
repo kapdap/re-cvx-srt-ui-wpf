@@ -4,15 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:SRTPluginUIRECVXWPF.Controls"
+        xmlns:ut="clr-namespace:SRTPluginUIRECVXWPF.Utilities"
         xmlns:local="clr-namespace:SRTPluginUIRECVXWPF"
         mc:Ignorable="d"
         Title="{Binding PluginTitle}"
+        Left="{ut:SettingBinding Left}"
+        Top="{ut:SettingBinding Top}"
         Width="458" Height="606"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         AllowsTransparency="True"
         WindowStyle="None"
         UseLayoutRounding="True"
+        LocationChanged="Window_LocationChanged"
         Closing="Window_Closing"
         MouseDown="Window_MouseDown">
     <Window.Resources>
@@ -80,7 +84,19 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel Name="LeftPanel">
+
+            <StackPanel Name="StatisticsContainer">
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Grid.Column" Value="0" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Options.SwapInventory}" Value="True">
+                                <Setter Property="Grid.Column" Value="1" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                
                 <StackPanel.Resources>
                     <Style x:Key="TimerLabelStyle" TargetType="{x:Type Label}">
                         <Setter Property="FontSize" Value="32" />
@@ -105,6 +121,13 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
+                    <Style x:Key="RankPanelStyle" TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Options.ShowRanking}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
                     <Style x:Key="EnemyPanelStyle" TargetType="{x:Type StackPanel}">
                         <Setter Property="Height" Value="261" />
                         <Style.Triggers>
@@ -122,13 +145,42 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Grid Name="StatusImageGrid">
+                <Grid Name="StatusPanel"
+                      Width="216"
+                      HorizontalAlignment="Left">
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding Options.StatusScale}"
                                         ScaleY="{Binding Options.StatusScale}"/>
                     </Grid.LayoutTransform>
-                    <Image Name="StatusImage"
-                           HorizontalAlignment="Left">
+                    
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="FontSize" Value="18" />
+                            <Setter Property="Foreground" Value="LawnGreen" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameMemory.Player.IsCautionYellow}" Value="true">
+                                    <Setter Property="Foreground" Value="Gold" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding GameMemory.Player.IsCautionOrange}" Value="true">
+                                    <Setter Property="Foreground" Value="Goldenrod" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding GameMemory.Player.IsDanger}" Value="true">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding GameMemory.Player.IsPoison}" Value="true">
+                                    <Setter Property="Foreground" Value="Purple" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding GameMemory.Player.IsGassed}" Value="true">
+                                    <Setter Property="Foreground" Value="Violet" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding GameMemory.Player.IsAlive}" Value="false">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Resources>
+                    
+                    <Image Name="StatusImage">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="uc:ImageBehavior.AnimatedSource" Value="/SRTPluginUIRECVXWPF;component/Resources/STATUS.gif" />
@@ -158,45 +210,47 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Label Name="StatusImageLabel"
-                           VerticalAlignment="Bottom">
+                    
+                    <Label Name="StatusNameLabel"
+                           Content="{Binding GameMemory.Player.StatusName}"
+                           Padding="0,0,5,0"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top">
                         <Label.Style>
                             <Style TargetType="{x:Type Label}">
-                                <Setter Property="FontSize" Value="22" />
-                                <Setter Property="Foreground" Value="LawnGreen" />
-                                <Setter Property="Content" Value="{Binding GameMemory.Player.DisplayHP}" />
-                                <Setter Property="Padding" Value="20,0,0,0" />
+                                <Setter Property="FontSize" Value="18" />
+                                <Setter Property="Visibility" Value="Hidden" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding GameMemory.Player.IsCautionYellow}" Value="true">
-                                        <Setter Property="Foreground" Value="Gold" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding GameMemory.Player.IsCautionOrange}" Value="true">
-                                        <Setter Property="Foreground" Value="Goldenrod" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding GameMemory.Player.IsDanger}" Value="true">
-                                        <Setter Property="Foreground" Value="Red" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding GameMemory.Player.IsPoison}" Value="true">
+                                    <DataTrigger Binding="{Binding GameMemory.Player.IsGassed}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" />
                                         <Setter Property="Foreground" Value="Violet" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding GameMemory.Player.IsGassed}" Value="true">
-                                        <Setter Property="Foreground" Value="Purple" />
-                                    </DataTrigger>
                                     <DataTrigger Binding="{Binding GameMemory.Player.IsAlive}" Value="false">
+                                        <Setter Property="Visibility" Value="Visible" />
                                         <Setter Property="Foreground" Value="Red" />
-                                        <Setter Property="Content" Value="DEAD" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Label.Style>
                     </Label>
+
+                    <Label Name="StatusHealthLabel"
+                           Content="{Binding GameMemory.Player.HealthMessage}"
+                           Padding="10,0,0,0"
+                           VerticalAlignment="Bottom">
+                    </Label>
                 </Grid>
 
-                <StackPanel>
+                <StackPanel Name="StatisticsPanel"
+                            Width="216"
+                            HorizontalAlignment="Left">
                     <StackPanel.LayoutTransform>
-                        <ScaleTransform ScaleX="{Binding Options.TextScale}"
-                                        ScaleY="{Binding Options.TextScale}"/>
+                        <ScaleTransform ScaleX="{Binding Options.StatisticsScale}"
+                                        ScaleY="{Binding Options.StatisticsScale}"/>
                     </StackPanel.LayoutTransform>
+                    
                     <Label Name="TimerLabel"
                            Content="{Binding GameMemory.IGT.FormattedString}"
                            Style="{StaticResource TimerLabelStyle}">
@@ -205,10 +259,6 @@
                     <StackPanel Name="DebugPanel"
                                 Margin="0,0,0,10"
                                 Style="{StaticResource DebugPanelStyle}">
-                        <StackPanel.LayoutTransform>
-                            <ScaleTransform ScaleX="{Binding Options.TextScale}"
-                                            ScaleY="{Binding Options.TextScale}"/>
-                        </StackPanel.LayoutTransform>
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="Foreground" Value="Gray" />
@@ -230,110 +280,144 @@
                                 <Setter Property="Padding" Value="5,0,0,0" />
                             </Style>
                         </StackPanel.Resources>
-                        <Label Name="StatusLabel"  Content="{Binding GameMemory.Player.StatusName}" ContentStringFormat=" Status: {0}" />
-                        <Label Name="SavesLabel"   Content="{Binding GameMemory.Player.Saves}"      ContentStringFormat="  Saves: {0}" />
-                        <Label Name="RetryLabel"   Content="{Binding GameMemory.Player.Retry}"      ContentStringFormat="  Retry: {0}" />
-                        <Label Name="FASLabel"     Content="{Binding GameMemory.Player.FAS}"        ContentStringFormat="  F.A.S: {0}" />
-                        <Label Name="MapLabel"     Content="{Binding GameMemory.Rank.Map}"          ContentStringFormat="    Map: {0}" />
-                        <Label Name="SteveLabel"   Content="{Binding GameMemory.Rank.Steve}"        ContentStringFormat="  Steve: {0}" />
-                        <Label Name="RodrigoLabel" Content="{Binding GameMemory.Rank.Rodrigo}"      ContentStringFormat="Rodrigo: {0}" />
-                        <Label Name="ScoreLabel"   Content="{Binding GameMemory.Rank.Score}"        ContentStringFormat="  Score: {0}" />
-                        <Label Name="RankLabel"    Content="{Binding GameMemory.Rank.Name}"         ContentStringFormat="   Rank: {0}" />
+                        <Label Name="SavesLabel" Content="{Binding GameMemory.Player.Saves}" ContentStringFormat="  Saves: {0}" />
+                        <Label Name="RetryLabel" Content="{Binding GameMemory.Player.Retry}" ContentStringFormat="  Retry: {0}" />
+                        <Label Name="FASLabel"   Content="{Binding GameMemory.Player.FAS}"   ContentStringFormat="  F.A.S: {0}" />
                     </StackPanel>
 
-                    <StackPanel Name="EnemyPanel"
-                            MaxWidth="216"
-                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
+                    <StackPanel Name="RankPanel"
+                            Margin="0,0,0,5"
+                            Style="{StaticResource RankPanelStyle}">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Padding" Value="5,0,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        
+                        <Label Name="TimeScoreLabel"    Content="{Binding GameMemory.Rank.Time}"    ContentStringFormat="   Time: {0}" />
+                        <Label Name="SavesScoreLabel"   Content="{Binding GameMemory.Rank.Saves}"   ContentStringFormat="  Saves: {0}" />
+                        <Label Name="RetryScoreLabel"   Content="{Binding GameMemory.Rank.Retry}"   ContentStringFormat="  Retry: {0}" />
+                        <Label Name="FASScoreLabel"     Content="{Binding GameMemory.Rank.FAS}"     ContentStringFormat="  F.A.S: {0}" />
+                        <Label Name="MapScoreLabel"     Content="{Binding GameMemory.Rank.Map}"     ContentStringFormat="    Map: {0}" />
+                        <Label Name="SteveScoreLabel"   Content="{Binding GameMemory.Rank.Steve}"   ContentStringFormat="  Steve: {0}" />
+                        <Label Name="RodrigoScoreLabel" Content="{Binding GameMemory.Rank.Rodrigo}" ContentStringFormat="Rodrigo: {0}" />
+                        <Label Name="TotalScoreLabel"   Content="{Binding GameMemory.Rank.Score}"   ContentStringFormat="  Total: {0}" />
+                        <Label Name="RankNameLabel"     Content="{Binding GameMemory.Rank.Name}"    ContentStringFormat="   Rank: {0}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Name="EnemyPanel"
+                            Width="216"
                             Style="{StaticResource EnemyPanelStyle}"
                             HorizontalAlignment="Left"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                        <Label Name="EnemyLabel">
-                            <Label.Style>
-                                <Style TargetType="{x:Type Label}">
-                                    <Setter Property="Foreground" Value="Red" />
-                                    <Setter Property="Content" Value="Enemy HP" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Options.ShowBosses}" Value="True">
-                                            <Setter Property="Content" Value="Boss HP" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Label.Style>
-                        </Label>
-                        <ListView Name="EnemyList"
+                    <StackPanel.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding Options.EnemyScale}"
+                                        ScaleY="{Binding Options.EnemyScale}"/>
+                    </StackPanel.LayoutTransform>
+                    
+                    <Label Name="EnemyLabel">
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Content" Value="Enemy HP" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Options.ShowBosses}" Value="True">
+                                        <Setter Property="Content" Value="Boss HP" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    
+                    <ListView Name="EnemyList"
                               ItemsSource="{Binding GameMemory.Enemy}"
                               Background="{x:Null}"
                               BorderThickness="0"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="{x:Type ListViewItem}">
-                                    <Setter Property="Padding" Value="0" />
-                                    <Setter Property="BorderThickness" Value="0" />
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                    <Setter Property="ToolTip" Value="{Binding TypeName}" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsAlive}" Value="False">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding IsBoss}"  Value="True" />
-                                                <Condition Binding="{Binding IsAlive}" Value="True" />
-                                                <Condition Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True" />
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </MultiDataTrigger>
-                                        <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                            <Setter Property="ToolTip" Value="Slot:Damage:CurrentHP:MaximumHP:HasMaxHP:IsEmpty:IsAlive:Action:Status:Model:Type" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsEmpty}" Value="True">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ListViewItem Padding="0" BorderThickness="0" HorizontalContentAlignment="Stretch">
-                                        <Grid Height="29">
-                                            <ProgressBar Value="{Binding Percentage, Mode=OneWay}" Minimum="0" Maximum="1" Background="#FF3C3C3C" Foreground="#FF640000" BorderThickness="0" />
-                                            <TextBlock VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="FontSize" Value="14" />
-                                                        <Setter Property="Foreground" Value="Red" />
-                                                        <Setter Property="Padding" Value="5,0,0,0" />
-                                                        <Setter Property="Text" Value="{Binding HealthMessage, Mode=OneWay}" />
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
-                                                                <Setter Property="Text" Value="{Binding DebugMessage, Mode=OneWay}" />
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
-                                        </Grid>
-                                    </ListViewItem>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="ToolTip" Value="{Binding TypeName}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsAlive}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsBoss}"  Value="True" />
+                                            <Condition Binding="{Binding IsAlive}" Value="True" />
+                                            <Condition Binding="{Binding DataContext.Options.ShowBosses, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </MultiDataTrigger>
+                                    <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Setter Property="ToolTip" Value="Slot:Damage:CurrentHP:MaximumHP:HasMaxHP:IsEmpty:IsAlive:Action:Status:Model:Type" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ListViewItem Padding="0" BorderThickness="0" HorizontalContentAlignment="Stretch">
+                                    <Grid Height="29">
+                                        <ProgressBar Value="{Binding Percentage, Mode=OneWay}" Minimum="0" Maximum="1" Background="#FF3C3C3C" Foreground="#FF640000" BorderThickness="0" />
+                                        <TextBlock VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                    <Setter Property="Padding" Value="5,0,0,0" />
+                                                    <Setter Property="Text" Value="{Binding HealthMessage, Mode=OneWay}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
+                                                            <Setter Property="Text" Value="{Binding DebugMessage, Mode=OneWay}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Grid>
+                                </ListViewItem>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
             </StackPanel>
 
-            <Grid Grid.Column="1">
+            <Grid Name="InventoryContainer">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Grid.Column" Value="1" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Options.SwapInventory}" Value="True">
+                                <Setter Property="Grid.Column" Value="0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                
                 <Grid.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding Options.InventoryScale}"
                                     ScaleY="{Binding Options.InventoryScale}"/>
                 </Grid.LayoutTransform>
 
                 <ItemsControl Name="InventoryPanel"
-                          ItemsSource="{Binding Inventory.Items}"
-                          Margin="48,0,0,0">
+                              ItemsSource="{Binding Inventory.Items}"
+                              Margin="48,0,0,0">
                     <ItemsControl.Style>
                         <Style TargetType="{x:Type ItemsControl}">
                             <Style.Triggers>
@@ -389,11 +473,13 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Grid.Style>
+                                
                                 <Rectangle>
                                     <Rectangle.Fill>
-                                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Clipping}" />
+                                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Clipping.Clipping}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
+                                
                                 <Label VerticalAlignment="Bottom">
                                     <Label.Style>
                                         <Style TargetType="{x:Type Label}">
@@ -454,9 +540,9 @@
                     </Grid.ColumnDefinitions>
 
                     <Rectangle Name="EquipmentRectangle"
-                           HorizontalAlignment="Center"
-                           Width="{Binding Equipment.ClipWidth}"
-                           ToolTip="{Binding Equipment.Entry.Name}">
+                               HorizontalAlignment="Center"
+                               Width="{Binding Equipment.Clipping.Width}"
+                               ToolTip="{Binding Equipment.Entry.Name}">
                         <Rectangle.Style>
                             <Style TargetType="{x:Type Rectangle}">
                                 <Style.Triggers>
@@ -466,12 +552,14 @@
                                 </Style.Triggers>
                             </Style>
                         </Rectangle.Style>
+                        
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping}" />
+                            <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping.Clipping}" />
                         </Rectangle.Fill>
                     </Rectangle>
+                    
                     <Label Name="EquipmentLabel"
-                       VerticalAlignment="Bottom">
+                           VerticalAlignment="Bottom">
                         <Label.Style>
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="FontSize" Value="18" />

@@ -12,6 +12,7 @@ namespace SRTPluginUIRECVXWPF
     {
         public static bool IsExiting { get; private set; }
 
+        public static PluginConfig Config { get; private set; }
         public static PluginUI PluginUI { get; private set; }
         public static Dispatcher DispatcherUI { get; private set; }
 
@@ -21,6 +22,9 @@ namespace SRTPluginUIRECVXWPF
         public static int Initialize(PluginUI plugin)
         {
             PluginUI = plugin;
+
+            Config = PluginUI.LoadConfiguration<PluginConfig>();
+            Config.PropertyChanged += ChangedConfiguration;
 
             try
             {
@@ -52,7 +56,11 @@ namespace SRTPluginUIRECVXWPF
         {
             IsExiting = true;
 
+            PluginUI.SaveConfiguration(Config);
             Properties.Settings.Default.Save();
+
+            try { Config.PropertyChanged -= ChangedConfiguration; }
+            catch (Exception) { }
 
             try
             {
@@ -75,6 +83,7 @@ namespace SRTPluginUIRECVXWPF
             }
             finally
             {
+                Config = null;
                 DispatcherUI = null;
                 IsExiting = false;
             }
@@ -85,6 +94,9 @@ namespace SRTPluginUIRECVXWPF
 
         public static void ShowExceptionMessage(Exception ex) =>
             PluginUI.HostDelegates.ExceptionMessage.Invoke(ex);
+
+        private static void ChangedConfiguration(object sender, PropertyChangedEventArgs e) =>
+            PluginUI.SaveConfiguration(Config);
 
         public static class Windows
         {
@@ -148,6 +160,7 @@ namespace SRTPluginUIRECVXWPF
 
             public static void DisposeAll()
             {
+                _appView?.Dispose();
                 _appView = null;
             }
         }
