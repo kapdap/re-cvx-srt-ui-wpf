@@ -23,7 +23,7 @@ namespace SRTPluginUIRECVXWPF
 
         public int ReceiveData(object gameMemory)
         {
-            Plugin.Models.AppView.Initalize((GameMemoryRECVX)gameMemory);
+            Plugin.Models.AppView.Initalize((IGameMemoryRECVX)gameMemory);
             return 0;
         }
     }

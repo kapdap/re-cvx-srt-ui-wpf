@@ -17,40 +17,28 @@ namespace SRTPluginUIRECVXWPF.ViewModels
 
         public OptionModel Options { get; } = new OptionModel();
 
-        private GameMemoryRECVX _gameMemory;
-        public GameMemoryRECVX GameMemory
+        private IGameMemoryRECVX _gameMemory;
+        public IGameMemoryRECVX GameMemory
         {
             get => _gameMemory;
-            private set
-            {
-                _gameMemory = value;
-                OnPropertyChanged();
-            }
+            private set => SetField(ref _gameMemory, value);
         }
 
         private InventoryModel _inventory;
         public InventoryModel Inventory
         {
             get => _inventory;
-            private set
-            {
-                _inventory = value;
-                OnPropertyChanged();
-            }
+            private set => SetField(ref _inventory, value);
         }
 
         private InventoryItem _equipment;
         public InventoryItem Equipment
         {
             get => _equipment;
-            private set
-            {
-                _equipment = value;
-                OnPropertyChanged();
-            }
+            private set => SetField(ref _equipment, value);
         }
 
-        public void Initalize(GameMemoryRECVX gameMemory)
+        public void Initalize(IGameMemoryRECVX gameMemory)
         {
             if (GameMemory != null)
                 return;

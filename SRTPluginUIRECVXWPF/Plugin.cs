@@ -1,5 +1,6 @@
 ﻿using SRTPluginUIRECVXWPF.ViewModels;
 using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace SRTPluginUIRECVXWPF
         public static bool IsExiting { get; private set; }
 
         public static PluginUI PluginUI { get; private set; }
-        public static Dispatcher UIDispatcher { get; private set; }
+        public static Dispatcher DispatcherUI { get; private set; }
 
         public static readonly string Name = Assembly.GetExecutingAssembly().GetName().Name.ToString();
         public static readonly string Version = String.Format("v{0}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
@@ -26,8 +27,8 @@ namespace SRTPluginUIRECVXWPF
                 // https://stackoverflow.com/a/36006943
                 Thread t = new Thread(new ThreadStart(() =>
                 {
-                    UIDispatcher = Dispatcher.CurrentDispatcher;
-                    UIDispatcher.Invoke(delegate
+                    DispatcherUI = Dispatcher.CurrentDispatcher;
+                    DispatcherUI.Invoke(delegate
                     {
                         Windows.Main.Show();
                     });
@@ -55,14 +56,14 @@ namespace SRTPluginUIRECVXWPF
 
             try
             {
-                if (UIDispatcher != null)
+                if (DispatcherUI != null)
                 {
-                    UIDispatcher.Invoke(delegate
+                    DispatcherUI.Invoke(delegate
                     {
                         Windows.CloseAll();
                         Models.DisposeAll();
                     });
-                    UIDispatcher.InvokeShutdown();
+                    DispatcherUI.InvokeShutdown();
                 }
 
                 return 0;
@@ -74,52 +75,37 @@ namespace SRTPluginUIRECVXWPF
             }
             finally
             {
-                UIDispatcher = null;
+                DispatcherUI = null;
                 IsExiting = false;
             }
         }
 
         public static void ShowMessage(string message) =>
-            PluginUI.HostDelegates.OutputMessage(message);
+            PluginUI.HostDelegates.OutputMessage.Invoke(message);
 
         public static void ShowExceptionMessage(Exception ex) =>
-            PluginUI.HostDelegates.ExceptionMessage(ex);
+            PluginUI.HostDelegates.ExceptionMessage.Invoke(ex);
 
         public static class Windows
         {
             private static MainWindow _main;
             public static MainWindow Main
             {
-                get
-                {
-                    if (_main == null)
-                        _main = new MainWindow();
-                    return _main;
-                }
+                get => _main == null ? _main = new MainWindow() : _main;
                 set => _main = value;
             }
 
             private static OptionsWindow _options;
             public static OptionsWindow Options
             {
-                get
-                {
-                    if (_options == null)
-                        _options = new OptionsWindow();
-                    return _options;
-                }
+                get => _options == null ? _options = new OptionsWindow() : _options;
                 set => _options = value;
             }
 
             private static AboutWindow _about;
             public static AboutWindow About
             {
-                get
-                {
-                    if (_about == null)
-                        _about = new AboutWindow();
-                    return _about;
-                }
+                get => _about == null ? _about = new AboutWindow() : _about;
                 set => _about = value;
             }
 
@@ -156,12 +142,7 @@ namespace SRTPluginUIRECVXWPF
             private static AppViewModel _appView;
             public static AppViewModel AppView
             {
-                get
-                {
-                    if (_appView == null)
-                        _appView = new AppViewModel();
-                    return _appView;
-                }
+                get => _appView == null ? _appView = new AppViewModel() : _appView;
                 set => _appView = value;
             }
 

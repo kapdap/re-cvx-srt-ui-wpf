@@ -10,89 +10,9 @@ namespace SRTPluginUIRECVXWPF.Models
         public const int ImageWidth = 96;
         public const int ImageHeight = 96;
 
-        private InventoryEntry _entry;
-        public InventoryEntry Entry
-        {
-            get => _entry;
-            set
-            {
-                if (!value.Equals(_entry))
-                {
-                    _entry = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public InventoryEntry Entry { get; set; }
 
-        private int _clipX;
-        public int ClipX
-        {
-            get => _clipX;
-            set
-            {
-                if (_clipX != value)
-                {
-                    _clipX = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _clipY;
-        public int ClipY
-        {
-            get => _clipY;
-            set
-            {
-                if (_clipY != value)
-                {
-                    _clipY = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _clipWidth;
-        public int ClipWidth
-        {
-            get => _clipWidth;
-            set
-            {
-                if (_clipWidth != value)
-                {
-                    _clipWidth = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _clipHeight;
-        public int ClipHeight
-        {
-            get => _clipHeight;
-            set
-            {
-                if (_clipHeight != value)
-                {
-                    _clipHeight = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _clipping;
-        public string Clipping
-        {
-            get => _clipping;
-            set
-            {
-                if (_clipping != value)
-                {
-                    _clipping = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public ClippingModel Clipping { get; } = new ClippingModel(ImageWidth, ImageHeight);
 
         public InventoryItem(InventoryEntry entry)
         {
@@ -104,362 +24,476 @@ namespace SRTPluginUIRECVXWPF.Models
 
         private void UpdatePropertyEvent(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "UpdateEntry")
-                return;
-
-            UpdateClipping();
+            if (e.PropertyName == "Type" && e.PropertyName != "UpdateEntry")
+                UpdateClipping();
         }
 
         private void UpdateClipping()
-        {
-            int[] clipping = GetClipping();
-
-            ClipX = clipping[0];
-            ClipY = clipping[1];
-            ClipWidth = clipping[2];
-            ClipHeight = clipping[3];
-
-            Clipping = String.Format("{0},{1},{2},{3}", ClipX, ClipY, ClipWidth, ClipHeight);
-        }
-
-        private int[] GetClipping()
         {
             switch (Entry.Type)
             {
                 // Row 1
                 case ItemEnumeration.RocketLauncher:
-                    return GenerateClipping(1, 0, Entry.SlotSize);
+                    Clipping.Update(1, 0, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AssaultRifle:
-                    return GenerateClipping(3, 0, Entry.SlotSize);
+                    Clipping.Update(3, 0, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SniperRifle:
-                    return GenerateClipping(5, 0, Entry.SlotSize);
+                    Clipping.Update(5, 0, Entry.SlotSize);
+                    break;
 
                 // Row 2
                 case ItemEnumeration.Shotgun:
-                    return GenerateClipping(1, 1, Entry.SlotSize);
+                    Clipping.Update(1, 1, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.HandgunGlock17:
-                    return GenerateClipping(2, 1, Entry.SlotSize);
+                    Clipping.Update(2, 1, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GrenadeLauncher:
-                    return GenerateClipping(3, 1, Entry.SlotSize);
+                    Clipping.Update(3, 1, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BowGun:
-                    return GenerateClipping(4, 1, Entry.SlotSize);
+                    Clipping.Update(4, 1, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.CombatKnife:
-                    return GenerateClipping(5, 1, Entry.SlotSize);
+                    Clipping.Update(5, 1, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Handgun:
-                    return GenerateClipping(6, 1, Entry.SlotSize);
+                    Clipping.Update(6, 1, Entry.SlotSize);
+                    break;
 
                 // Row 3
                 case ItemEnumeration.CustomHandgun:
-                    return GenerateClipping(0, 2, Entry.SlotSize);
+                    Clipping.Update(0, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.LinearLauncher:
-                    return GenerateClipping(1, 2, Entry.SlotSize);
+                    Clipping.Update(1, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.HandgunBullets:
-                    return GenerateClipping(2, 2, Entry.SlotSize);
+                    Clipping.Update(2, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MagnumBullets:
-                    return GenerateClipping(3, 2, Entry.SlotSize);
+                    Clipping.Update(3, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MagnumBulletsInsideCase:
-                    return GenerateClipping(3, 2, Entry.SlotSize);
+                    Clipping.Update(3, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ShotgunShells:
-                    return GenerateClipping(4, 2, Entry.SlotSize);
+                    Clipping.Update(4, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GrenadeRounds:
-                    return GenerateClipping(5, 2, Entry.SlotSize);
+                    Clipping.Update(5, 2, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AcidRounds:
-                    return GenerateClipping(6, 2, Entry.SlotSize);
+                    Clipping.Update(6, 2, Entry.SlotSize);
+                    break;
 
                 // Row 4
                 case ItemEnumeration.FlameRounds:
-                    return GenerateClipping(0, 3, Entry.SlotSize);
+                    Clipping.Update(0, 3, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BowGunArrows:
-                    return GenerateClipping(1, 3, Entry.SlotSize);
+                    Clipping.Update(1, 3, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.M93RPart:
-                    return GenerateClipping(2, 3, Entry.SlotSize);
+                    Clipping.Update(2, 3, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.FAidSpray:
-                    return GenerateClipping(3, 3, Entry.SlotSize);
+                    Clipping.Update(3, 3, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GreenHerb:
-                    return GenerateClipping(4, 3, Entry.SlotSize);
+                    Clipping.Update(4, 3, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.RedHerb:
-                    return GenerateClipping(5, 3, Entry.SlotSize);
+                    Clipping.Update(5, 3, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BlueHerb:
-                    return GenerateClipping(6, 3, Entry.SlotSize);
+                    Clipping.Update(6, 3, Entry.SlotSize);
+                    break;
 
                 // Row 5
                 case ItemEnumeration.MixedHerb2Green:
-                    return GenerateClipping(0, 4, Entry.SlotSize);
+                    Clipping.Update(0, 4, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MixedHerbRedGreen:
-                    return GenerateClipping(1, 4, Entry.SlotSize);
+                    Clipping.Update(1, 4, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MixedHerbBlueGreen:
-                    return GenerateClipping(2, 4, Entry.SlotSize);
+                    Clipping.Update(2, 4, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MixedHerb2GreenBlue:
-                    return GenerateClipping(3, 4, Entry.SlotSize);
+                    Clipping.Update(3, 4, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MixedHerb3Green:
-                    return GenerateClipping(4, 4, Entry.SlotSize);
+                    Clipping.Update(4, 4, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MixedHerbGreenBlueRed:
-                    return GenerateClipping(5, 4, Entry.SlotSize);
+                    Clipping.Update(5, 4, Entry.SlotSize);
+                    break;
 
                 // Row 6
                 case ItemEnumeration.InkRibbon:
-                    return GenerateClipping(0, 5, Entry.SlotSize);
+                    Clipping.Update(0, 5, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Magnum:
-                    return GenerateClipping(1, 5, Entry.SlotSize);
+                    Clipping.Update(1, 5, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldLugers:
-                    return GenerateClipping(2, 5, Entry.SlotSize);
+                    Clipping.Update(2, 5, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SubMachineGun:
-                    return GenerateClipping(4, 5, Entry.SlotSize);
+                    Clipping.Update(4, 5, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BowGunPowder:
-                    return GenerateClipping(6, 5, Entry.SlotSize);
+                    Clipping.Update(6, 5, Entry.SlotSize);
+                    break;
 
                 // Row 7
                 case ItemEnumeration.GunPowderArrow:
-                    return GenerateClipping(0, 6, Entry.SlotSize);
+                    Clipping.Update(0, 6, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BOWGasRounds:
-                    return GenerateClipping(1, 6, Entry.SlotSize);
+                    Clipping.Update(1, 6, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MGunBullets:
-                    return GenerateClipping(2, 6, Entry.SlotSize);
+                    Clipping.Update(2, 6, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GasMask:
-                    return GenerateClipping(3, 6, Entry.SlotSize);
+                    Clipping.Update(3, 6, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.RifleBullets:
-                    return GenerateClipping(4, 6, Entry.SlotSize);
+                    Clipping.Update(4, 6, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.DuraluminCaseUnused:
-                    return GenerateClipping(5, 6, Entry.SlotSize);
+                    Clipping.Update(5, 6, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ARifleBullets:
-                    return GenerateClipping(6, 6, Entry.SlotSize);
+                    Clipping.Update(6, 6, Entry.SlotSize);
+                    break;
 
                 // Row 8
                 case ItemEnumeration.AlexandersPierce:
-                    return GenerateClipping(0, 7, Entry.SlotSize);
+                    Clipping.Update(0, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AlexandersJewel:
-                    return GenerateClipping(1, 7, Entry.SlotSize);
+                    Clipping.Update(1, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AlfredsRing:
-                    return GenerateClipping(2, 7, Entry.SlotSize);
+                    Clipping.Update(2, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AlfredsJewel:
-                    return GenerateClipping(3, 7, Entry.SlotSize);
+                    Clipping.Update(3, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.LugerReplica:
-                    return GenerateClipping(4, 7, Entry.SlotSize);
+                    Clipping.Update(4, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.FamilyPicture:
-                    return GenerateClipping(5, 7, Entry.SlotSize);
+                    Clipping.Update(5, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.CalicoBullets:
-                    return GenerateClipping(6, 7, Entry.SlotSize);
+                    Clipping.Update(6, 7, Entry.SlotSize);
+                    break;
 
                 // Row 9
                 case ItemEnumeration.Lockpick:
-                    return GenerateClipping(0, 8, Entry.SlotSize);
+                    Clipping.Update(0, 8, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GlassEye:
-                    return GenerateClipping(1, 8, Entry.SlotSize);
+                    Clipping.Update(1, 8, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.PianoRoll:
-                    return GenerateClipping(2, 8, Entry.SlotSize);
+                    Clipping.Update(2, 8, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SteeringWheel:
-                    return GenerateClipping(3, 8, Entry.SlotSize);
+                    Clipping.Update(3, 8, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.CraneKey:
-                    return GenerateClipping(4, 8, Entry.SlotSize);
+                    Clipping.Update(4, 8, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Lighter:
-                    return GenerateClipping(5, 8, Entry.SlotSize);
+                    Clipping.Update(5, 8, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.EaglePlate:
-                    return GenerateClipping(6, 8, Entry.SlotSize);
+                    Clipping.Update(6, 8, Entry.SlotSize);
+                    break;
 
                 // Row 10
                 case ItemEnumeration.SidePack:
-                    return GenerateClipping(0, 9, Entry.SlotSize);
+                    Clipping.Update(0, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MapRoll:
-                    return GenerateClipping(1, 9, Entry.SlotSize);
+                    Clipping.Update(1, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.HawkEmblem:
-                    return GenerateClipping(2, 9, Entry.SlotSize);
+                    Clipping.Update(2, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.QueenAntObject:
-                    return GenerateClipping(3, 9, Entry.SlotSize);
+                    Clipping.Update(3, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.KingAntObject:
-                    return GenerateClipping(4, 9, Entry.SlotSize);
+                    Clipping.Update(4, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BiohazardCard:
-                    return GenerateClipping(5, 9, Entry.SlotSize);
+                    Clipping.Update(5, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.DuraluminCaseM93RParts:
-                    return GenerateClipping(6, 9, Entry.SlotSize);
+                    Clipping.Update(6, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.DuraluminCaseBowGunPowder:
-                    return GenerateClipping(6, 9, Entry.SlotSize);
+                    Clipping.Update(6, 9, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.DuraluminCaseMagnumRounds:
-                    return GenerateClipping(6, 9, Entry.SlotSize);
+                    Clipping.Update(6, 9, Entry.SlotSize);
+                    break;
 
                 // Row 11
                 case ItemEnumeration.Detonator:
-                    return GenerateClipping(0, 10, Entry.SlotSize);
+                    Clipping.Update(0, 10, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ControlLever:
-                    return GenerateClipping(1, 10, Entry.SlotSize);
+                    Clipping.Update(1, 10, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldDragonfly:
-                    return GenerateClipping(2, 10, Entry.SlotSize);
+                    Clipping.Update(2, 10, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SilverKey:
-                    return GenerateClipping(3, 10, Entry.SlotSize);
+                    Clipping.Update(3, 10, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldKey:
-                    return GenerateClipping(4, 10, Entry.SlotSize);
+                    Clipping.Update(4, 10, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ArmyProof:
-                    return GenerateClipping(5, 10, Entry.SlotSize);
+                    Clipping.Update(5, 10, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.NavyProof:
-                    return GenerateClipping(6, 10, Entry.SlotSize);
+                    Clipping.Update(6, 10, Entry.SlotSize);
+                    break;
 
                 // Row 12
                 case ItemEnumeration.AirForceProof:
-                    return GenerateClipping(0, 11, Entry.SlotSize);
+                    Clipping.Update(0, 11, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.KeyWithTag:
-                    return GenerateClipping(1, 11, Entry.SlotSize);
+                    Clipping.Update(1, 11, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.IDCard:
-                    return GenerateClipping(2, 11, Entry.SlotSize);
+                    Clipping.Update(2, 11, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Map:
-                    return GenerateClipping(3, 11, Entry.SlotSize);
+                    Clipping.Update(3, 11, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AirportKey:
-                    return GenerateClipping(4, 11, Entry.SlotSize);
+                    Clipping.Update(4, 11, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.EmblemCard:
-                    return GenerateClipping(5, 11, Entry.SlotSize);
+                    Clipping.Update(5, 11, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SkeletonPicture:
-                    return GenerateClipping(6, 11, Entry.SlotSize);
+                    Clipping.Update(6, 11, Entry.SlotSize);
+                    break;
 
                 // Row 13
                 case ItemEnumeration.MusicBoxPlate:
-                    return GenerateClipping(0, 12, Entry.SlotSize);
+                    Clipping.Update(0, 12, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldDragonflyNoWings:
-                    return GenerateClipping(1, 12, Entry.SlotSize);
+                    Clipping.Update(1, 12, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Album:
-                    return GenerateClipping(2, 12, Entry.SlotSize);
+                    Clipping.Update(2, 12, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Halberd:
-                    return GenerateClipping(3, 12, Entry.SlotSize);
+                    Clipping.Update(3, 12, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Extinguisher:
-                    return GenerateClipping(4, 12, Entry.SlotSize);
+                    Clipping.Update(4, 12, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Briefcase:
-                    return GenerateClipping(5, 12, Entry.SlotSize);
+                    Clipping.Update(5, 12, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.PadlockKey:
-                    return GenerateClipping(6, 12, Entry.SlotSize);
+                    Clipping.Update(6, 12, Entry.SlotSize);
+                    break;
 
                 // Row 14
                 case ItemEnumeration.TG01:
-                    return GenerateClipping(0, 13, Entry.SlotSize);
+                    Clipping.Update(0, 13, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SpAlloyEmblem:
-                    return GenerateClipping(1, 13, Entry.SlotSize);
+                    Clipping.Update(1, 13, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ValveHandle:
-                    return GenerateClipping(2, 13, Entry.SlotSize);
+                    Clipping.Update(2, 13, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.OctaValveHandle:
-                    return GenerateClipping(3, 13, Entry.SlotSize);
+                    Clipping.Update(3, 13, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MachineRoomKey:
-                    return GenerateClipping(4, 13, Entry.SlotSize);
+                    Clipping.Update(4, 13, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.MiningRoomKey:
-                    return GenerateClipping(5, 13, Entry.SlotSize);
+                    Clipping.Update(5, 13, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BarCodeSticker:
-                    return GenerateClipping(6, 13, Entry.SlotSize);
+                    Clipping.Update(6, 13, Entry.SlotSize);
+                    break;
 
                 // Row 15
                 case ItemEnumeration.SterileRoomKey:
-                    return GenerateClipping(0, 14, Entry.SlotSize);
+                    Clipping.Update(0, 14, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.DoorKnob:
-                    return GenerateClipping(1, 14, Entry.SlotSize);
+                    Clipping.Update(1, 14, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BatteryPack:
-                    return GenerateClipping(2, 14, Entry.SlotSize);
+                    Clipping.Update(2, 14, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.HemostaticWire:
-                    return GenerateClipping(3, 14, Entry.SlotSize);
+                    Clipping.Update(3, 14, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.TurnTableKey:
-                    return GenerateClipping(4, 14, Entry.SlotSize);
+                    Clipping.Update(4, 14, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ChemStorageKey:
-                    return GenerateClipping(5, 14, Entry.SlotSize);
+                    Clipping.Update(5, 14, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ClementAlpha:
-                    return GenerateClipping(6, 14, Entry.SlotSize);
+                    Clipping.Update(6, 14, Entry.SlotSize);
+                    break;
 
                 // Row 16
                 case ItemEnumeration.ClementSigma:
-                    return GenerateClipping(0, 15, Entry.SlotSize);
+                    Clipping.Update(0, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.TankObject:
-                    return GenerateClipping(1, 15, Entry.SlotSize);
+                    Clipping.Update(1, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SpAlloyEmblemUnused:
-                    return GenerateClipping(2, 15, Entry.SlotSize);
+                    Clipping.Update(2, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.ClementMixture:
-                    return GenerateClipping(3, 15, Entry.SlotSize);
+                    Clipping.Update(3, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.RustedSword:
-                    return GenerateClipping(4, 15, Entry.SlotSize);
+                    Clipping.Update(4, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Hemostatic:
-                    return GenerateClipping(5, 15, Entry.SlotSize);
+                    Clipping.Update(5, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SecurityCard:
-                    return GenerateClipping(6, 15, Entry.SlotSize);
+                    Clipping.Update(6, 15, Entry.SlotSize);
+                    break;
 
                 // Row 17
                 case ItemEnumeration.SecurityFile:
-                    return GenerateClipping(0, 16, Entry.SlotSize);
+                    Clipping.Update(0, 16, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AlexiasChoker:
-                    return GenerateClipping(1, 16, Entry.SlotSize);
+                    Clipping.Update(1, 16, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AlexiasJewel:
-                    return GenerateClipping(2, 16, Entry.SlotSize);
+                    Clipping.Update(2, 16, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.QueenAntRelief:
-                    return GenerateClipping(3, 16, Entry.SlotSize);
+                    Clipping.Update(3, 16, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.KingAntRelief:
-                    return GenerateClipping(4, 16, Entry.SlotSize);
+                    Clipping.Update(4, 16, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.RedJewel:
-                    return GenerateClipping(5, 16, Entry.SlotSize);
+                    Clipping.Update(5, 16, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BlueJewel:
-                    return GenerateClipping(6, 16, Entry.SlotSize);
+                    Clipping.Update(6, 16, Entry.SlotSize);
+                    break;
 
                 // Row 18
                 case ItemEnumeration.Socket:
-                    return GenerateClipping(0, 17, Entry.SlotSize);
+                    Clipping.Update(0, 17, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SqValveHandle:
-                    return GenerateClipping(1, 17, Entry.SlotSize);
+                    Clipping.Update(1, 17, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Serum:
-                    return GenerateClipping(2, 17, Entry.SlotSize);
+                    Clipping.Update(2, 17, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.EarthenwareVase:
-                    return GenerateClipping(3, 17, Entry.SlotSize);
+                    Clipping.Update(3, 17, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.PaperWeight:
-                    return GenerateClipping(4, 17, Entry.SlotSize);
+                    Clipping.Update(4, 17, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SilverDragonflyNoWings:
-                    return GenerateClipping(5, 17, Entry.SlotSize);
+                    Clipping.Update(5, 17, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.SilverDragonfly:
-                    return GenerateClipping(6, 17, Entry.SlotSize);
+                    Clipping.Update(6, 17, Entry.SlotSize);
+                    break;
 
                 // Row 19
                 case ItemEnumeration.WingObject:
-                    return GenerateClipping(0, 18, Entry.SlotSize);
+                    Clipping.Update(0, 18, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Crystal:
-                    return GenerateClipping(1, 18, Entry.SlotSize);
+                    Clipping.Update(1, 18, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldDragonfly1Wing:
-                    return GenerateClipping(2, 18, Entry.SlotSize);
+                    Clipping.Update(2, 18, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldDragonfly2Wings:
-                    return GenerateClipping(3, 18, Entry.SlotSize);
+                    Clipping.Update(3, 18, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.GoldDragonfly3Wings:
-                    return GenerateClipping(4, 18, Entry.SlotSize);
+                    Clipping.Update(4, 18, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.File:
-                    return GenerateClipping(5, 18, Entry.SlotSize);
+                    Clipping.Update(5, 18, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.PlantPot:
-                    return GenerateClipping(6, 18, Entry.SlotSize);
+                    Clipping.Update(6, 18, Entry.SlotSize);
+                    break;
 
                 // Row 20
                 case ItemEnumeration.PictureB:
-                    return GenerateClipping(0, 19, Entry.SlotSize);
+                    Clipping.Update(0, 19, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.M1P:
-                    return GenerateClipping(1, 19, Entry.SlotSize);
+                    Clipping.Update(1, 19, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BowGunPowderUnused:
-                    return GenerateClipping(3, 19, Entry.SlotSize);
+                    Clipping.Update(3, 19, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.EnhancedHandgun:
-                    return GenerateClipping(4, 19, Entry.SlotSize);
+                    Clipping.Update(4, 19, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.PlayingManual:
-                    return GenerateClipping(6, 19, Entry.SlotSize);
+                    Clipping.Update(6, 19, Entry.SlotSize);
+                    break;
 
                 // Shares Icon (Unused Content)
                 case ItemEnumeration.PrisonersDiary:
-                    return GenerateClipping(4, 7, Entry.SlotSize);
+                    Clipping.Update(4, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.DirectorsMemo:
-                    return GenerateClipping(5, 7, Entry.SlotSize);
+                    Clipping.Update(5, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.Instructions:
-                    return GenerateClipping(6, 7, Entry.SlotSize);
+                    Clipping.Update(6, 7, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.AlfredsMemo:
-                    return GenerateClipping(3, 15, Entry.SlotSize);
+                    Clipping.Update(3, 15, Entry.SlotSize);
+                    break;
                 case ItemEnumeration.BoardClip:
-                    return GenerateClipping(6, 19, Entry.SlotSize);
+                    Clipping.Update(6, 19, Entry.SlotSize);
+                    break;
 
                 // No Icon (Unused Content)
+                case ItemEnumeration.None:
                 default:
-                    return GenerateClipping(0, 0, Entry.SlotSize);
+                    Clipping.Update(0, 0, Entry.SlotSize);
+                    break;
             }
-        }
-
-        private int[] GenerateClipping(int column, int row, int size = 1)
-        {
-            int[] clipping = new int[4];
-
-            clipping[0] = ImageWidth * column;
-            clipping[1] = ImageHeight * row;
-            clipping[2] = ImageWidth * size;
-            clipping[3] = ImageHeight;
-
-            return clipping;
         }
     }
 }
