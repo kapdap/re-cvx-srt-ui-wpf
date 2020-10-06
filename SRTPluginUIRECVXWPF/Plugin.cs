@@ -51,6 +51,8 @@ namespace SRTPluginUIRECVXWPF
         {
             IsExiting = true;
 
+            Properties.Settings.Default.Save();
+
             try
             {
                 if (UIDispatcher != null)

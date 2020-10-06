@@ -3,22 +3,22 @@ using SRTPluginProviderRECVX;
 
 namespace SRTPluginUIRECVXWPF
 {
-    public class PluginUI : IPluginUI
+    public class PluginUI : PluginBase, IPluginUI
     {
         public string RequiredProvider => "SRTPluginProviderRECVX";
 
         internal static PluginInfo _info = new PluginInfo();
-        public IPluginInfo Info => _info;
+        public override IPluginInfo Info => _info;
 
         public IPluginHostDelegates HostDelegates { get; private set; }
 
-        public int Startup(IPluginHostDelegates hostDelegates)
+        public override int Startup(IPluginHostDelegates hostDelegates)
         {
             HostDelegates = hostDelegates;
             return Plugin.Initialize(this);
         }
 
-        public int Shutdown() =>
+        public override int Shutdown() =>
             Plugin.Exit();
 
         public int ReceiveData(object gameMemory)
