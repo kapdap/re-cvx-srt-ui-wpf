@@ -22,6 +22,12 @@
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBackground"
                          Color="{Binding Options.Background}" />
+        <DropShadowEffect x:Key="TextBlurEffect"
+                          ShadowDepth="0"
+                          Direction="315"
+                          Color="#000000"
+                          Opacity="1"
+                          BlurRadius="5" />
     </Window.Resources>
 
     <Window.Style>
@@ -250,11 +256,11 @@
                         <ScaleTransform ScaleX="{Binding Options.StatisticsScale}"
                                         ScaleY="{Binding Options.StatisticsScale}"/>
                     </StackPanel.LayoutTransform>
-                    
+
                     <Label Name="TimerLabel"
                            Content="{Binding GameMemory.IGT.FormattedString}"
-                           Style="{StaticResource TimerLabelStyle}">
-                    </Label>
+                           Style="{StaticResource TimerLabelStyle}"
+                           Effect="{StaticResource TextBlurEffect}" />
 
                     <StackPanel Name="DebugPanel"
                                 Margin="0,0,0,10"
@@ -263,6 +269,7 @@
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="Foreground" Value="Gray" />
                                 <Setter Property="Padding" Value="5,0,0,0" />
+                                <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                             </Style>
                         </StackPanel.Resources>
                         <Label Name="RunningTimerLabel" Content="{Binding GameMemory.IGT.RunningTimer}"     ContentStringFormat="T: {0:#0000000000}" />
@@ -278,6 +285,7 @@
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="Foreground" Value="White" />
                                 <Setter Property="Padding" Value="5,0,0,0" />
+                                <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                             </Style>
                         </StackPanel.Resources>
                         <Label Name="SavesLabel" Content="{Binding GameMemory.Player.Saves}" ContentStringFormat="  Saves: {0}" />
@@ -292,6 +300,7 @@
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="Foreground" Value="White" />
                                 <Setter Property="Padding" Value="5,0,0,0" />
+                                <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                             </Style>
                         </StackPanel.Resources>
                         
@@ -323,6 +332,7 @@
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="Foreground" Value="Red" />
                                 <Setter Property="Content" Value="Enemy HP" />
+                                <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Options.ShowBosses}" Value="True">
                                         <Setter Property="Content" Value="Boss HP" />
@@ -381,6 +391,7 @@
                                                     <Setter Property="FontSize" Value="14" />
                                                     <Setter Property="Foreground" Value="Red" />
                                                     <Setter Property="Padding" Value="5,0,0,0" />
+                                                    <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                                                     <Setter Property="Text" Value="{Binding HealthMessage, Mode=OneWay}" />
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding DataContext.Options.DebugEnemy, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="True">
@@ -486,6 +497,7 @@
                                             <Setter Property="FontSize" Value="18" />
                                             <Setter Property="Foreground" Value="White" />
                                             <Setter Property="Content" Value="{Binding Entry.Quantity}" />
+                                            <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Entry.IsEmpty}" Value="true">
                                                     <Setter Property="Visibility" Value="Hidden" />
@@ -565,6 +577,7 @@
                                 <Setter Property="FontSize" Value="18" />
                                 <Setter Property="Foreground" Value="White" />
                                 <Setter Property="Content" Value="{Binding Equipment.Entry.Quantity}" />
+                                <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Equipment.Entry.IsEmpty}" Value="true">
                                         <Setter Property="Visibility" Value="Hidden" />
