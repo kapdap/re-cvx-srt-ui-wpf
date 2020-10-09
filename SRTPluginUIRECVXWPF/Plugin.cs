@@ -24,7 +24,7 @@ namespace SRTPluginUIRECVXWPF
             PluginUI = plugin;
 
             Config = PluginUI.LoadConfiguration<PluginConfig>();
-            Config.PropertyChanged += ChangedConfiguration;
+            Config.PropertyChanged += Config_PropertyChanged;
 
             try
             {
@@ -59,7 +59,7 @@ namespace SRTPluginUIRECVXWPF
             PluginUI.SaveConfiguration(Config);
             Properties.Settings.Default.Save();
 
-            try { Config.PropertyChanged -= ChangedConfiguration; }
+            try { Config.PropertyChanged -= Config_PropertyChanged; }
             catch (Exception) { }
 
             try
@@ -68,8 +68,8 @@ namespace SRTPluginUIRECVXWPF
                 {
                     DispatcherUI.Invoke(delegate
                     {
-                        Windows.CloseAll();
-                        Models.DisposeAll();
+                        Models.Dispose();
+                        Windows.Close();
                     });
                     DispatcherUI.InvokeShutdown();
                 }
@@ -95,7 +95,7 @@ namespace SRTPluginUIRECVXWPF
         public static void ShowExceptionMessage(Exception ex) =>
             PluginUI.HostDelegates.ExceptionMessage.Invoke(ex);
 
-        private static void ChangedConfiguration(object sender, PropertyChangedEventArgs e) =>
+        private static void Config_PropertyChanged(object sender, PropertyChangedEventArgs e) =>
             PluginUI.SaveConfiguration(Config);
 
         public static class Windows
@@ -121,18 +121,18 @@ namespace SRTPluginUIRECVXWPF
                 set => _about = value;
             }
 
-            public static void CloseAll()
+            public static void Close()
             {
-                CloseWindow(_about);
-                CloseWindow(_options);
-                CloseWindow(_main);
+                Close(_about);
+                Close(_options);
+                Close(_main);
 
                 _about = null;
                 _options = null;
                 _main = null;
             }
 
-            public static void CloseWindow(Window window)
+            public static void Close(Window window)
             {
                 if (window == null)
                     return;
@@ -158,7 +158,7 @@ namespace SRTPluginUIRECVXWPF
                 set => _appView = value;
             }
 
-            public static void DisposeAll()
+            public static void Dispose()
             {
                 _appView?.Dispose();
                 _appView = null;

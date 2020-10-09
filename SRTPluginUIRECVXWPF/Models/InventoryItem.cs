@@ -24,7 +24,7 @@ namespace SRTPluginUIRECVXWPF.Models
 
         private void UpdatePropertyEvent(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Type" && e.PropertyName != "UpdateEntry")
+            if (e.PropertyName == "UpdateEntry")
                 UpdateClipping();
         }
 

@@ -51,10 +51,10 @@ namespace SRTPluginUIRECVXWPF.ViewModels
             Equipment = new InventoryItem(GameMemory.Player.Equipment);
 
             ToggleFindGameWindowHandler();
-            Options.PropertyChanged += ChangedConfiguration;
+            Options.PropertyChanged += Options_PropertyChanged;
         }
 
-        private void ChangedConfiguration(object sender, PropertyChangedEventArgs e)
+        private void Options_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "AttachToWindow")
                 ToggleFindGameWindowHandler();
@@ -70,7 +70,7 @@ namespace SRTPluginUIRECVXWPF.ViewModels
             {
                 if (disposing)
                 {
-                    try { Options.PropertyChanged -= ChangedConfiguration; }
+                    try { Options.PropertyChanged -= Options_PropertyChanged; }
                     catch (Exception) { }
                 }
 

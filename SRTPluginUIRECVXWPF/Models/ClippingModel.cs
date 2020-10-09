@@ -5,14 +5,14 @@ namespace SRTPluginUIRECVXWPF.Models
 {
     public class ClippingModel : BaseNotifyModel
     {
-        private int _x;
+        private int _x = 0;
         public int X
         {
             get => _x;
             set => SetField(ref _x, value, "X", "Clipping");
         }
 
-        private int _y;
+        private int _y = 0;
         public int Y
         {
             get => _y;
@@ -45,6 +45,9 @@ namespace SRTPluginUIRECVXWPF.Models
         {
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
+
+            Width = ImageWidth;
+            Height = ImageHeight;
         }
 
         public void Update(int[] clip)
