@@ -86,6 +86,10 @@
 
         <Grid Name="ContentGrid"
               Opacity="{Binding Options.Opacity}">
+            <Grid.Resources>
+                <BitmapImage x:Key="InventoryIconsImage" UriSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" />    
+            </Grid.Resources>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -487,7 +491,7 @@
                                 
                                 <Rectangle>
                                     <Rectangle.Fill>
-                                        <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Clipping.Clipping}" />
+                                        <ImageBrush ImageSource="{StaticResource InventoryIconsImage}" ViewboxUnits="Absolute" Viewbox="{Binding Clipping.Clipping}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                                 
@@ -566,7 +570,7 @@
                         </Rectangle.Style>
                         
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/SRTPluginUIRECVXWPF;component/Resources/ICONS.png" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping.Clipping}" />
+                            <ImageBrush ImageSource="{StaticResource InventoryIconsImage}" ViewboxUnits="Absolute" Viewbox="{Binding Equipment.Clipping.Clipping}" />
                         </Rectangle.Fill>
                     </Rectangle>
                     
