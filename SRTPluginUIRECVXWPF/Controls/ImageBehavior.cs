@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,17 +12,12 @@ namespace SRTPluginUIRECVXWPF.Controls
     public static class ImageBehavior
     {
         #region AnimatedSource
-
         [AttachedPropertyBrowsableForType(typeof(Image))]
-        public static ImageSource GetAnimatedSource(Image obj)
-        {
-            return (ImageSource)obj.GetValue(AnimatedSourceProperty);
-        }
+        public static ImageSource GetAnimatedSource(Image obj) =>
+            (ImageSource)obj.GetValue(AnimatedSourceProperty);
 
-        public static void SetAnimatedSource(Image obj, ImageSource value)
-        {
+        public static void SetAnimatedSource(Image obj, ImageSource value) =>
             obj.SetValue(AnimatedSourceProperty, value);
-        }
 
         public static readonly DependencyProperty AnimatedSourceProperty =
             DependencyProperty.RegisterAttached(
@@ -55,7 +51,7 @@ namespace SRTPluginUIRECVXWPF.Controls
                     TimeSpan totalDuration = TimeSpan.Zero;
                     BitmapSource prevFrame = null;
                     FrameInfo prevInfo = null;
-                    foreach (var rawFrame in decoder.Frames)
+                    foreach (BitmapFrame rawFrame in decoder.Frames)
                     {
                         FrameInfo info = GetFrameInfo(rawFrame);
                         BitmapSource frame = MakeFrame(
@@ -118,18 +114,18 @@ namespace SRTPluginUIRECVXWPF.Controls
             BitmapSource previousFrame, FrameInfo previousFrameInfo)
         {
             DrawingVisual visual = new DrawingVisual();
-            using (var context = visual.RenderOpen())
+            using (DrawingContext context = visual.RenderOpen())
             {
                 if (previousFrameInfo != null && previousFrame != null &&
                     previousFrameInfo.DisposalMethod == FrameDisposalMethod.Combine)
                 {
-                    var fullRect = new Rect(0, 0, fullImage.PixelWidth, fullImage.PixelHeight);
+                    Rect fullRect = new Rect(0, 0, fullImage.PixelWidth, fullImage.PixelHeight);
                     context.DrawImage(previousFrame, fullRect);
                 }
 
                 context.DrawImage(rawFrame, frameInfo.Rect);
             }
-            var bitmap = new RenderTargetBitmap(
+            RenderTargetBitmap bitmap = new RenderTargetBitmap(
                 fullImage.PixelWidth, fullImage.PixelHeight,
                 fullImage.DpiX, fullImage.DpiY,
                 PixelFormats.Pbgra32);
@@ -148,7 +144,7 @@ namespace SRTPluginUIRECVXWPF.Controls
 
             public Rect Rect
             {
-                get { return new Rect(Left, Top, Width, Height); }
+                get => new Rect(Left, Top, Width, Height);
             }
         }
 
@@ -162,7 +158,7 @@ namespace SRTPluginUIRECVXWPF.Controls
 
         private static FrameInfo GetFrameInfo(BitmapFrame frame)
         {
-            var frameInfo = new FrameInfo
+            FrameInfo frameInfo = new FrameInfo
             {
                 Delay = TimeSpan.FromMilliseconds(100),
                 DisposalMethod = FrameDisposalMethod.Replace,
@@ -185,34 +181,32 @@ namespace SRTPluginUIRECVXWPF.Controls
                     const string leftQuery = "/imgdesc/Left";
                     const string topQuery = "/imgdesc/Top";
 
-                    var delay = metadata.GetQueryOrNull<ushort>(delayQuery);
+                    ushort? delay = metadata.GetQueryOrNull<ushort>(delayQuery);
                     if (delay.HasValue)
                         frameInfo.Delay = TimeSpan.FromMilliseconds(10 * delay.Value);
 
-                    var disposal = metadata.GetQueryOrNull<byte>(disposalQuery);
+                    ushort? disposal = metadata.GetQueryOrNull<byte>(disposalQuery);
                     if (disposal.HasValue)
                         frameInfo.DisposalMethod = (FrameDisposalMethod)disposal.Value;
 
-                    var width = metadata.GetQueryOrNull<ushort>(widthQuery);
+                    ushort? width = metadata.GetQueryOrNull<ushort>(widthQuery);
                     if (width.HasValue)
                         frameInfo.Width = width.Value;
 
-                    var height = metadata.GetQueryOrNull<ushort>(heightQuery);
+                    ushort? height = metadata.GetQueryOrNull<ushort>(heightQuery);
                     if (height.HasValue)
                         frameInfo.Height = height.Value;
 
-                    var left = metadata.GetQueryOrNull<ushort>(leftQuery);
+                    ushort? left = metadata.GetQueryOrNull<ushort>(leftQuery);
                     if (left.HasValue)
                         frameInfo.Left = left.Value;
 
-                    var top = metadata.GetQueryOrNull<ushort>(topQuery);
+                    ushort? top = metadata.GetQueryOrNull<ushort>(topQuery);
                     if (top.HasValue)
                         frameInfo.Top = top.Value;
                 }
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
 
             return frameInfo;
         }
@@ -228,7 +222,6 @@ namespace SRTPluginUIRECVXWPF.Controls
             }
             return null;
         }
-
         #endregion
     }
 
@@ -239,9 +232,7 @@ namespace SRTPluginUIRECVXWPF.Controls
             where T : FrameworkElement
         {
             if (element.IsLoaded)
-            {
                 action(element);
-            }
             else
             {
                 void handler(object sender, RoutedEventArgs e)
