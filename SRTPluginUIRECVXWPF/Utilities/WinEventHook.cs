@@ -109,7 +109,7 @@ namespace SRTPluginUIRECVXWPF.Utilities
             OBJID_NATIVEOM = 0xFFFFFFF0
         }
 
-        private static SWEH_dwFlags WinEventHookInternalFlags = SWEH_dwFlags.WINEVENT_OUTOFCONTEXT |
+        private static readonly SWEH_dwFlags WinEventHookInternalFlags = SWEH_dwFlags.WINEVENT_OUTOFCONTEXT |
                                                                 SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS |
                                                                 SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD;
 

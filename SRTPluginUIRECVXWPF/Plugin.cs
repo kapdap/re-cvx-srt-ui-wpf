@@ -103,21 +103,21 @@ namespace SRTPluginUIRECVXWPF
             private static MainWindow _main;
             public static MainWindow Main
             {
-                get => _main == null ? _main = new MainWindow() : _main;
+                get => _main ??= new MainWindow();
                 set => _main = value;
             }
 
             private static OptionsWindow _options;
             public static OptionsWindow Options
             {
-                get => _options == null ? _options = new OptionsWindow() : _options;
+                get => _options ??= new OptionsWindow();
                 set => _options = value;
             }
 
             private static AboutWindow _about;
             public static AboutWindow About
             {
-                get => _about == null ? _about = new AboutWindow() : _about;
+                get => _about ??= new AboutWindow();
                 set => _about = value;
             }
 
@@ -154,7 +154,7 @@ namespace SRTPluginUIRECVXWPF
             private static AppViewModel _appView;
             public static AppViewModel AppView
             {
-                get => _appView == null ? _appView = new AppViewModel() : _appView;
+                get => _appView ??= new AppViewModel();
                 set => _appView = value;
             }
 

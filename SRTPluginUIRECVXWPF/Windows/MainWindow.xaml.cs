@@ -13,8 +13,8 @@ namespace SRTPluginUIRECVXWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IGameMemoryRECVX _gameMemory;
-        private PluginConfig _options;
+        private readonly IGameMemoryRECVX _gameMemory;
+        private readonly PluginConfig _options;
 
         private IntPtr _windowEventHook;
         private GCHandle _windowEventGCHandle;

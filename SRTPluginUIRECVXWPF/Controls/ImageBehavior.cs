@@ -34,20 +34,14 @@ namespace SRTPluginUIRECVXWPF.Controls
 
         private static void AnimatedSourceChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            Image imageControl = o as Image;
-            if (imageControl == null)
+            if (!(o is Image imageControl))
                 return;
 
-            var oldValue = e.OldValue as ImageSource;
-            var newValue = e.NewValue as ImageSource;
-            if (oldValue != null)
-            {
+            if (e.OldValue is ImageSource oldValue)
                 imageControl.BeginAnimation(Image.SourceProperty, null);
-            }
-            if (newValue != null)
-            {
+
+            if (e.NewValue is ImageSource newValue)
                 imageControl.DoWhenLoaded(InitAnimationOrImage);
-            }
         }
 
         private static void InitAnimationOrImage(Image imageControl)
@@ -55,22 +49,21 @@ namespace SRTPluginUIRECVXWPF.Controls
             BitmapSource source = GetAnimatedSource(imageControl) as BitmapSource;
             if (source != null)
             {
-                var decoder = GetDecoder(source) as GifBitmapDecoder;
-                if (decoder != null && decoder.Frames.Count > 1)
+                if (GetDecoder(source) is GifBitmapDecoder decoder && decoder.Frames.Count > 1)
                 {
-                    var animation = new ObjectAnimationUsingKeyFrames();
-                    var totalDuration = TimeSpan.Zero;
+                    ObjectAnimationUsingKeyFrames animation = new ObjectAnimationUsingKeyFrames();
+                    TimeSpan totalDuration = TimeSpan.Zero;
                     BitmapSource prevFrame = null;
                     FrameInfo prevInfo = null;
                     foreach (var rawFrame in decoder.Frames)
                     {
-                        var info = GetFrameInfo(rawFrame);
-                        var frame = MakeFrame(
+                        FrameInfo info = GetFrameInfo(rawFrame);
+                        BitmapSource frame = MakeFrame(
                             source,
                             rawFrame, info,
                             prevFrame, prevInfo);
 
-                        var keyFrame = new DiscreteObjectKeyFrame(frame, totalDuration);
+                        DiscreteObjectKeyFrame keyFrame = new DiscreteObjectKeyFrame(frame, totalDuration);
                         animation.KeyFrames.Add(keyFrame);
 
                         totalDuration += info.Delay;
@@ -94,14 +87,12 @@ namespace SRTPluginUIRECVXWPF.Controls
         private static BitmapDecoder GetDecoder(BitmapSource image)
         {
             BitmapDecoder decoder = null;
-            var frame = image as BitmapFrame;
-            if (frame != null)
+            if (image is BitmapFrame frame)
                 decoder = frame.Decoder;
 
             if (decoder == null)
             {
-                var bmp = image as BitmapImage;
-                if (bmp != null)
+                if (image is BitmapImage bmp)
                 {
                     if (bmp.StreamSource != null)
                     {
@@ -253,12 +244,12 @@ namespace SRTPluginUIRECVXWPF.Controls
             }
             else
             {
-                RoutedEventHandler handler = null;
-                handler = (sender, e) =>
+                void handler(object sender, RoutedEventArgs e)
                 {
                     element.Loaded -= handler;
                     action(element);
-                };
+                }
+
                 element.Loaded += handler;
             }
         }
