@@ -56,11 +56,15 @@ namespace SRTPluginUIRECVXWPF
         {
             IsExiting = true;
 
-            PluginUI.SaveConfiguration(Config);
-            Properties.Settings.Default.Save();
+            if (Config != null)
+            {
+                PluginUI.SaveConfiguration(Config);
 
-            try { Config.PropertyChanged -= Config_PropertyChanged; }
-            catch (Exception) { }
+                try { Config.PropertyChanged -= Config_PropertyChanged; }
+                catch (Exception) { }
+            }
+
+            Properties.Settings.Default.Save();
 
             try
             {
