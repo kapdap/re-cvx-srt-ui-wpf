@@ -87,9 +87,6 @@ namespace SRTPluginUIRECVXWPF
             catch (Exception) { }
 
             DisableAttactWindow();
-
-            if (Plugin.IsExiting) return;
-            Plugin.Exit();
         }
 
         protected void UpdateAttachWindowPosition()

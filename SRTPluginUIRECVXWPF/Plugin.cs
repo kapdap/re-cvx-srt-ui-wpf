@@ -34,6 +34,7 @@ namespace SRTPluginUIRECVXWPF
                     DispatcherUI = Dispatcher.CurrentDispatcher;
                     DispatcherUI.Invoke(delegate
                     {
+                        Windows.Main.AllowsTransparency = Config.Transparent;
                         Windows.Main.Show();
                     });
                     Dispatcher.Run();
@@ -99,8 +100,16 @@ namespace SRTPluginUIRECVXWPF
         public static void ShowExceptionMessage(Exception ex) =>
             PluginUI.HostDelegates.ExceptionMessage.Invoke(ex);
 
-        private static void Config_PropertyChanged(object sender, PropertyChangedEventArgs e) =>
+        private static void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Config.Transparent))
+                DispatcherUI.Invoke(delegate
+                {
+                    Windows.ReopenMain();
+                });
+
             PluginUI.SaveConfiguration(Config);
+        }
 
         public static class Windows
         {
@@ -150,6 +159,15 @@ namespace SRTPluginUIRECVXWPF
                 {
                     ShowExceptionMessage(ex);
                 }
+            }
+
+            public static void ReopenMain()
+            {
+                Close(_main);
+                _main = null;
+
+                Main.AllowsTransparency = Config.Transparent;
+                Main.Show();
             }
         }
 

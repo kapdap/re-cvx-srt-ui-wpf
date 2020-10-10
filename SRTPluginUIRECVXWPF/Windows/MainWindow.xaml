@@ -13,7 +13,6 @@
         Width="458" Height="606"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
-        AllowsTransparency="True"
         WindowStyle="None"
         UseLayoutRounding="True"
         LocationChanged="Window_LocationChanged"
