@@ -32,8 +32,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Squirrelies\SRTHost\SRTPluginBase\SRTPluginBase.csproj" />
-    <ProjectReference Include="..\..\re-cvx-srt-provider\SRTPluginProviderRECVX\SRTPluginProviderRECVX.csproj" />
+    <ProjectReference Include="..\..\..\Squirrelies\SRTHost\SRTPluginBase\SRTPluginBase.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\re-cvx-srt-provider\SRTPluginProviderRECVX\SRTPluginProviderRECVX.csproj">
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
