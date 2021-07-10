@@ -75,7 +75,7 @@
                     <Label Content="License" Padding="0,0,0,0" Margin="10,0,10,0" Style="{StaticResource UnderlineLabel}" Name="LicenseLink" MouseUp="LicenseLink_MouseUp" />
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center">
-                    <Label Content="©2020+" Padding="0,0,0,0" FontSize="10" />
+                    <Label Content="©2021+" Padding="0,0,0,0" FontSize="10" />
                 </StackPanel>
             </StackPanel>
         </Grid>

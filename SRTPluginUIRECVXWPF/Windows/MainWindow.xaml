@@ -221,7 +221,7 @@
                     </Image>
                     
                     <Label Name="StatusNameLabel"
-                           Content="{Binding GameMemory.Player.StatusName}"
+                           Content="{Binding GameMemory.Player.StatusMessage}"
                            Padding="0,0,5,0"
                            HorizontalContentAlignment="Center"
                            VerticalContentAlignment="Center"
