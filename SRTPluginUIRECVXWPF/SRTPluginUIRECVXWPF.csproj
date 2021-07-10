@@ -18,6 +18,7 @@
     <UseWPF>true</UseWPF>
     <OutputType>Library</OutputType>
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <OutputPath>bin\$(Configuration)\$(AssemblyName)\</OutputPath>
