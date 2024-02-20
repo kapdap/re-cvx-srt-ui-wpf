@@ -7,14 +7,14 @@
     <Company>Kapdap</Company>
     <Product>Resident Evil: Code: Veronica WPF User Interface Plugin</Product>
     <Description>A user-interface plugin to display the values provided by the Resident Evil: Code: Veronica Memory Provider Plugin in a WPF window.</Description>
-    <Copyright>Copyright © 2021 Kapdap</Copyright>
+    <Copyright>Copyright © 2024 Kapdap</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/kapdap/re-cvx-srt-ui-wpf</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>speedrun</PackageTags>
-    <Version>0.9.1.0</Version>
-    <FileVersion>0.9.1.0</FileVersion>
-    <AssemblyVersion>0.9.1.0</AssemblyVersion>
+    <Version>0.9.4.0</Version>
+    <FileVersion>0.9.4.0</FileVersion>
+    <AssemblyVersion>0.9.4.0</AssemblyVersion>
     <UseWPF>true</UseWPF>
     <OutputType>Library</OutputType>
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
