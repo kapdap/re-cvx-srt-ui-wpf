@@ -90,11 +90,11 @@ namespace SRTPluginUIRECVXWPF
             set => SetField(ref _showStatistics, value);
         }
 
-        private bool _showRanking = false;
-        public bool ShowRanking
+        private bool _showScoring = false;
+        public bool ShowScoring
         {
-            get => _showRanking;
-            set => SetField(ref _showRanking, value);
+            get => _showScoring;
+            set => SetField(ref _showScoring, value);
         }
 
         private bool _showEnemy = true;

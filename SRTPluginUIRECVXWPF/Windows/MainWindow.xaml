@@ -130,9 +130,9 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                    <Style x:Key="RankPanelStyle" TargetType="{x:Type StackPanel}">
+                    <Style x:Key="ScorePanelStyle" TargetType="{x:Type StackPanel}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Options.ShowRanking}" Value="False">
+                            <DataTrigger Binding="{Binding Options.ShowScoring}" Value="False">
                                 <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -294,11 +294,12 @@
                         <Label Name="SavesLabel" Content="{Binding GameMemory.Player.Saves}" ContentStringFormat="  Saves: {0}" />
                         <Label Name="RetryLabel" Content="{Binding GameMemory.Player.Retry}" ContentStringFormat="  Retry: {0}" />
                         <Label Name="FASLabel"   Content="{Binding GameMemory.Player.FAS}"   ContentStringFormat="  F.A.S: {0}" />
+                        <Label Name="RankLabel"  Content="{Binding GameMemory.Rank.Name}"    ContentStringFormat="   Rank: {0}" ToolTip="Ranking is only avaliable in Normal mode." />
                     </StackPanel>
 
-                    <StackPanel Name="RankPanel"
+                    <StackPanel Name="ScorePanel"
                             Margin="0,0,0,5"
-                            Style="{StaticResource RankPanelStyle}">
+                            Style="{StaticResource ScorePanelStyle}">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Label}">
                                 <Setter Property="Foreground" Value="White" />
@@ -306,16 +307,16 @@
                                 <Setter Property="Effect" Value="{StaticResource TextBlurEffect}" />
                             </Style>
                         </StackPanel.Resources>
-                        
-                        <Label Name="TimeScoreLabel"    Content="{Binding GameMemory.Rank.Time}"    ContentStringFormat="   Time: {0}" />
-                        <Label Name="SavesScoreLabel"   Content="{Binding GameMemory.Rank.Saves}"   ContentStringFormat="  Saves: {0}" />
-                        <Label Name="RetryScoreLabel"   Content="{Binding GameMemory.Rank.Retry}"   ContentStringFormat="  Retry: {0}" />
-                        <Label Name="FASScoreLabel"     Content="{Binding GameMemory.Rank.FAS}"     ContentStringFormat="  F.A.S: {0}" />
-                        <Label Name="MapScoreLabel"     Content="{Binding GameMemory.Rank.Map}"     ContentStringFormat="    Map: {0}" />
-                        <Label Name="SteveScoreLabel"   Content="{Binding GameMemory.Rank.Steve}"   ContentStringFormat="  Steve: {0}" />
-                        <Label Name="RodrigoScoreLabel" Content="{Binding GameMemory.Rank.Rodrigo}" ContentStringFormat="Rodrigo: {0}" />
-                        <Label Name="TotalScoreLabel"   Content="{Binding GameMemory.Rank.Score}"   ContentStringFormat="  Total: {0}" />
-                        <Label Name="RankNameLabel"     Content="{Binding GameMemory.Rank.Name}"    ContentStringFormat="   Rank: {0}" />
+
+                        <Label Name="RocketUsedLabel"   Content="{Binding GameMemory.Rank.Rocket}"  ContentStringFormat=" Rocket: {0}" ToolTip="Using the Rocket Launcher limits you to rank B." />
+                        <Label Name="TimeScoreLabel"    Content="{Binding GameMemory.Rank.Time}"    ContentStringFormat="   Time: {0}" ToolTip="Complete the game in under:&#x0a;4h30m for 8250 points&#x0a;5h00m for 7550 points&#x0a;5h30m for 7000 points&#x0a;6h00m for 6450 points&#x0a;7h00m for 5500 points&#x0a;15h00m for 5000 points&#x0a;20h00m for 2500 points&#x0a;Any time for 2000 points." ToolTipService.ShowDuration="60000" />
+                        <Label Name="SavesScoreLabel"   Content="{Binding GameMemory.Rank.Saves}"   ContentStringFormat="  Saves: {0}" ToolTip="Lose 1000 points for first save then 50 points for each save." />
+                        <Label Name="RetryScoreLabel"   Content="{Binding GameMemory.Rank.Retry}"   ContentStringFormat="  Retry: {0}" ToolTip="Lose 1000 points for first retry then 50 points for each retry." />
+                        <Label Name="FASScoreLabel"     Content="{Binding GameMemory.Rank.FAS}"     ContentStringFormat="  F.A.S: {0}" ToolTip="Never use F.A.S for 1800 points." />
+                        <Label Name="MapScoreLabel"     Content="{Binding GameMemory.Rank.Map}"     ContentStringFormat="    Map: {0}" ToolTip="Thoroughly explore all areas of the map for 100 points." />
+                        <Label Name="SteveScoreLabel"   Content="{Binding GameMemory.Rank.Steve}"   ContentStringFormat="  Steve: {0}" ToolTip="Gain 400 points for completing Steves section quickly or lose 1000 points by completing it slowly." />
+                        <Label Name="RodrigoScoreLabel" Content="{Binding GameMemory.Rank.Rodrigo}" ContentStringFormat="Rodrigo: {0}" ToolTip="Give Rodrigo the Hemostatic for 250 points or lose 1000 points." />
+                        <Label Name="TotalScoreLabel"   Content="{Binding GameMemory.Rank.Score}"   ContentStringFormat="  Total: {0}" ToolTip="Total score determines rank:&#x0a;Rank A over 9999&#x0a;Rank B over 6999&#x0a;Rank C over 4999&#x0a;Rank D over 1000&#x0a;Rank E any score&#x0a;Rank F Easy/Very Easy modes" ToolTipService.ShowDuration="60000" />
                     </StackPanel>
                 </StackPanel>
 

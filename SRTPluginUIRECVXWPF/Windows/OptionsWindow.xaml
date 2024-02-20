@@ -42,7 +42,7 @@
                     <StackPanel>
                         <CheckBox Content="Show Timer"      IsChecked="{Binding Options.ShowTimer}"      Margin="0,0,0,10"  ToolTip="Show/hide the in game timer panel." />
                         <CheckBox Content="Show Statistics" IsChecked="{Binding Options.ShowStatistics}" Margin="0,0,0,10"  ToolTip="Show/hide the player statistics panel." />
-                        <CheckBox Content="Show Ranking"    IsChecked="{Binding Options.ShowRanking}"    Margin="0,0,0,10"  ToolTip="Show/hide player ranking and score panel." Visibility="Collapsed" />
+                        <CheckBox Content="Show Scoring"    IsChecked="{Binding Options.ShowScoring}"    Margin="0,0,0,10"  ToolTip="Show/hide detailed scoring panel." />
                         <CheckBox Content="Show Enemy"      IsChecked="{Binding Options.ShowEnemy}"      Margin="0,0,0,10"  ToolTip="Show/hide the enemy health panel." />
                         <CheckBox Content="Only Bosses"     IsChecked="{Binding Options.ShowBosses}"     Margin="20,0,0,10" ToolTip="Only show boss enemies." IsEnabled="{Binding Options.ShowEnemy}" />
                         <CheckBox Content="Show Inventory"  IsChecked="{Binding Options.ShowInventory}"  Margin="0,0,0,10"  ToolTip="Show/hide the player inventory panel." />
